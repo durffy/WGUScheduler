@@ -1,0 +1,2 @@
+rootProject.name='WGUScheduler'
+include ':app'
