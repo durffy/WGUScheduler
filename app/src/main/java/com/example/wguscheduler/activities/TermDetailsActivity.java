@@ -22,7 +22,7 @@ public class TermDetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //TODO: set the fields from the intent extras
-        //TODO: get all courses and filter down the courses by termId
+        //TODO: get all courses and filter down the courses by the intent extras
         //TODO: intent for Course
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
