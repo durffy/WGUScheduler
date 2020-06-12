@@ -72,7 +72,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
         return viewHolder;
     }
 
-    // bind the view holder ot the title
+    // Bind the Textview to the viewholder, e.g. display elements.
     @Override
     public void onBindViewHolder(TermAdapter.ViewHolder termViewHolder, int position) {
 
