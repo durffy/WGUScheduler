@@ -10,6 +10,7 @@ import com.example.wguscheduler.viewmodel.TermViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,6 +18,7 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.wguscheduler.R;
@@ -73,6 +75,18 @@ public class TermsActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+            int id = item.getItemId();
+            if( id == R.id.action_add_sample_data){
+                addSampleData();
+                return true;
+            }
 
+            return super.onOptionsItemSelected(item);
+    }
 
+    private void addSampleData() {
+        mTermViewModel.addSampleData();
+    }
 }
