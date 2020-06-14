@@ -15,9 +15,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -34,14 +37,15 @@ public class TermsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terms);
-        Toolbar toolbar = findViewById(R.id.toolbar);
 
-        //Add support to return to previous screen
+        //Add toolbar action items
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        // add the recycler view for displaying the terms
+        // add the recycler view for displaying the terms and initialize the view model
+        mTermViewModel = new ViewModelProvider(this).get(TermViewModel.class);
         RecyclerView recyclerView = findViewById(R.id.recycler_term);
         final TermAdapter termAdapter = new TermAdapter(this);
         recyclerView.setAdapter(termAdapter);
@@ -58,13 +62,15 @@ public class TermsActivity extends AppCompatActivity {
         });
 
         //observer changes to the terms
-        mTermViewModel.getAllTerms().observe(this, new Observer<List<TermEntity>>() {
-            @Override
-            public void onChanged(@Nullable final List<TermEntity> terms) {
-                // Update the cached copy of the words in the adapter.
-                termAdapter.setTerms(terms);
-            }
-        });
+       if(mTermViewModel.getAllTerms() != null) {
+           mTermViewModel.getAllTerms().observe(this, new Observer<List<TermEntity>>() {
+               @Override
+               public void onChanged(@Nullable final List<TermEntity> terms) {
+                   // Update the cached copy of the words in the adapter.
+                   termAdapter.setTerms(terms);
+               }
+           });
+       }
 
     }
 
@@ -74,11 +80,17 @@ public class TermsActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_terms, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
             int id = item.getItemId();
-            if( id == R.id.action_add_sample_data){
+            if( id == R.id.action_add_term_sample_data){
                 addSampleData();
                 return true;
             }
