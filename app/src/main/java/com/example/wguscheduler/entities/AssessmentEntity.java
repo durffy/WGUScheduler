@@ -26,4 +26,51 @@ public class AssessmentEntity {
     @ColumnInfo(name = "type")
     private String mType;
 
+    public AssessmentEntity(int mId, int mCourseId, String mTitle, String mDescription, String mType) {
+        this.mId = mId;
+        this.mCourseId = mCourseId;
+        this.mTitle = mTitle;
+        this.mDescription = mDescription;
+        this.mType = mType;
+    }
+
+    public int getId() {
+        return mId;
+    }
+
+    public void setId(int mId) {
+        this.mId = mId;
+    }
+
+    public int getCourseId() {
+        return mCourseId;
+    }
+
+    public void setCourseId(int mCourseId) {
+        this.mCourseId = mCourseId;
+    }
+
+    public String getTitle() {
+        return mTitle;
+    }
+
+    public void setTitle(String mTitle) {
+        this.mTitle = mTitle;
+    }
+
+    public String getDescription() {
+        return mDescription;
+    }
+
+    public void setDescription(String mDescription) {
+        this.mDescription = mDescription;
+    }
+
+    public String getType() {
+        return mType;
+    }
+
+    public void setType(String mType) {
+        this.mType = mType;
+    }
 }
