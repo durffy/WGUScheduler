@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.wguscheduler.dao.AssessmentDAO;
@@ -16,8 +17,10 @@ import com.example.wguscheduler.entities.AssessmentEntity;
 import com.example.wguscheduler.entities.CourseEntity;
 import com.example.wguscheduler.entities.MentorEntity;
 import com.example.wguscheduler.entities.TermEntity;
+import com.example.wguscheduler.utilities.Converters;
 
 @Database(entities = {TermEntity.class, AssessmentEntity.class, CourseEntity.class, MentorEntity.class}, version = 1)
+@TypeConverters({Converters.class})
 public abstract class SchedulerDatabase extends RoomDatabase {
     public abstract CourseDAO courseDAO();
     public abstract MentorDAO mentorDAO();
