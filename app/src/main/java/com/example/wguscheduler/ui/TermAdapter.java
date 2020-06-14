@@ -8,25 +8,34 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wguscheduler.R;
 import com.example.wguscheduler.activities.TermDetailsActivity;
 import com.example.wguscheduler.entities.TermEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
+/*
+TODO:
+    issue loading multiple terms from Utilities.SampleData, likely that the viewholder is setup
+    incorrectly. Look into this.
+ */
 
+public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView termTextItem;
+        private final CardView termCardItem;
 
         private ViewHolder(View itemView){
             super(itemView);
 
             termTextItem = itemView.findViewById(R.id.text_term_item);
+            termCardItem = itemView.findViewById(R.id.card_term_item);
 
             //onclick event for handling clicking terms in the terms activity
             itemView.setOnClickListener(v -> {
@@ -47,17 +56,25 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
         }
     }
 
-    // declar the inflater, an context and the terms
+    // declare the inflater, an context and the terms
     private final Context context;
     private final LayoutInflater mInflater;
-    private List<TermEntity> mTerms;
+    private List<TermEntity> mTerms = new ArrayList<>();
 
     // inflate the context
+
+    public TermAdapter(Context context, List<TermEntity> mTerms) {
+        this.context = context;
+        mInflater = LayoutInflater.from(context);
+        this.mTerms = mTerms;
+    }
+
     public TermAdapter(Context context){
         mInflater = LayoutInflater.from(context);
         this.context = context;
     }
 
+    //called each time a viewholder has to be created
     @NonNull
     @Override
     public TermAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -78,12 +95,14 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
 
         if(mTerms != null){
             TermEntity term = mTerms.get(position);
-
+            CardView cardView = termViewHolder.termCardItem;
             TextView textView = termViewHolder.termTextItem;
             textView.setText(term.getTitle());
 
         }else {
+
             termViewHolder.termTextItem.setText("No Terms!");
+
         }
 
     }
@@ -98,8 +117,5 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
         mTerms = terms;
         notifyDataSetChanged();
     }
-
-
-
 
 }
