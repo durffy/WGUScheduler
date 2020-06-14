@@ -18,10 +18,10 @@ public interface MentorDAO {
     void insert(MentorEntity mentor);
 
     //READ
-    @Query("SELECT * FROM MentorEntity")
+    @Query("SELECT * FROM mentor_table")
     LiveData<MentorEntity> getAll();
 
-    @Query("SELECT * FROM MentorEntity WHERE id MATCH :mentorId")
+    @Query("SELECT * FROM mentor_table WHERE id MATCH :mentorId")
     MentorEntity getMentor(int mentorId);
 
     //UPDATE

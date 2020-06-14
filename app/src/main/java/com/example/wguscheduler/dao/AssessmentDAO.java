@@ -13,14 +13,14 @@ import com.example.wguscheduler.entities.AssessmentEntity;
 @Dao
 public interface AssessmentDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertCourse(AssessmentEntity assesment);
+    void insertCourse(AssessmentEntity assessment);
 
-    @Query("SELECT * FROM assesment_table")
-    LiveData<AssessmentEntity> getAssesments();
+    @Query("SELECT * FROM assessment_table")
+    LiveData<AssessmentEntity> getAssessments();
 
     @Update
-    void updateAssesment(AssessmentEntity assesment);
+    void updateAssessment(AssessmentEntity assessment);
 
     @Delete
-    void deleteAssesment(AssessmentEntity assesment);
+    void deleteAssessment(AssessmentEntity assessment);
 }
