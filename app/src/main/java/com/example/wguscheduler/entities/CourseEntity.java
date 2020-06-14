@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Entity(tableName = "course_table")
 public class CourseEntity {
@@ -27,6 +27,51 @@ public class CourseEntity {
     @ColumnInfo(name = "end_date")
     private Date mEndDate;
 
+    public CourseEntity(int mId, int mTermId, int mMentorId, Date mStartDate, Date mEndDate) {
+        this.mId = mId;
+        this.mTermId = mTermId;
+        this.mMentorId = mMentorId;
+        this.mStartDate = mStartDate;
+        this.mEndDate = mEndDate;
+    }
 
+    public int getId() {
+        return mId;
+    }
 
+    public void setId(int Id) {
+        this.mId = Id;
+    }
+
+    public int getTermId() {
+        return mTermId;
+    }
+
+    public void setTermId(int TermId) {
+        this.mTermId = TermId;
+    }
+
+    public int getMentorId() {
+        return mMentorId;
+    }
+
+    public void setMentorId(int MentorId) {
+        this.mMentorId = MentorId;
+    }
+
+    public Date getStartDate() {
+        return mStartDate;
+    }
+
+    public void setStartDate(Date StartDate) {
+        this.mStartDate = StartDate;
+    }
+
+    public Date getEndDate() {
+        return mEndDate;
+    }
+
+    public void setEndDate(Date EndDate) {
+        this.mEndDate = EndDate;
+    }
 }

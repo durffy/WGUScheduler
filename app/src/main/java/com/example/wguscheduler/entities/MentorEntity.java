@@ -2,9 +2,7 @@ package com.example.wguscheduler.entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
-import androidx.room.Delete;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity (tableName = "mentor_table")
