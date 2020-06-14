@@ -8,6 +8,7 @@ import com.example.wguscheduler.entities.CourseEntity;
 import com.example.wguscheduler.entities.TermEntity;
 import com.example.wguscheduler.utilities.TermSampleData;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -35,11 +36,12 @@ public class SchedulerRepository {
 
 
     private SchedulerRepository(Context context){
-        mAllTerms = mSchedulerDatabase.termDAO().getTerms();
         mSchedulerDatabase = SchedulerDatabase.getDatabase(context);
+        mAllTerms = mSchedulerDatabase.termDAO().getTerms();
+
     }
 
-    public LiveData<List<TermEntity>> getmAllTerms() {
+    public LiveData<List<TermEntity>> getAllTerms() {
         return mAllTerms;
     }
 
@@ -49,7 +51,11 @@ public class SchedulerRepository {
             @Override
             public void run(){
 
-                mSchedulerDatabase.termDAO().insertAll(TermSampleData.getTerms());
+                try {
+                    mSchedulerDatabase.termDAO().insertAll(TermSampleData.getTerms());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
