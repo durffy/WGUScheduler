@@ -15,6 +15,7 @@ import com.example.wguscheduler.R;
 import com.example.wguscheduler.activities.TermDetailsActivity;
 import com.example.wguscheduler.entities.TermEntity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,12 +43,13 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
                 int position = getAdapterPosition();
                 final TermEntity current = mTerms.get(position);
                 Intent intent = new Intent(context, TermDetailsActivity.class);
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
                 //details of the term class to the intent
                 intent.putExtra("id", current.getId());
                 intent.putExtra("title",current.getTitle());
-                intent.putExtra("startDate",current.getStartDate());
-                intent.putExtra("endDate",current.getEndDate());
+                intent.putExtra("startDate",formatter.format(current.getStartDate()));
+                intent.putExtra("endDate",formatter.format(current.getEndDate()));
 
                 context.startActivity(intent);
 

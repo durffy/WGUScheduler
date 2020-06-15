@@ -9,10 +9,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.wguscheduler.R;
 
 public class TermDetailsActivity extends AppCompatActivity {
+
+    private TextView textViewTermTitle,
+            textViewStartDate,
+            textViewEndDate;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +31,14 @@ public class TermDetailsActivity extends AppCompatActivity {
         //TODO: set the fields from the intent extras
         //TODO: get all courses and filter down the courses by the intent extras
         //TODO: intent for Course
+        textViewTermTitle = findViewById(R.id.label_term_title);
+        textViewStartDate = findViewById(R.id.label_term_start_date_output);
+        textViewEndDate = findViewById(R.id.label_term_end_date_output);
+        if(getIntent().getStringExtra("title") != null){
+            textViewTermTitle.setText(getIntent().getStringExtra("title"));
+            textViewStartDate.setText(getIntent().getStringExtra("startDate"));
+            textViewEndDate.setText(getIntent().getStringExtra("endDate"));
+        }
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,16 +12,14 @@ import android.view.View;
 
 import com.example.wguscheduler.R;
 
-public class TermAddActivity extends AppCompatActivity {
+public class CoursesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_term_add);
+        setContentView(R.layout.activity_courses);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -33,10 +31,4 @@ public class TermAddActivity extends AppCompatActivity {
         });
     }
 
-    // add support for going back a screen
-    @Override
-    public boolean onSupportNavigateUp(){
-        onBackPressed();
-        return true;
-    }
 }

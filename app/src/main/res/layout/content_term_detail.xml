@@ -7,5 +7,51 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
+    <TextView
+        android:id="@+id/label_term_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Term"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/label_term_start_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Date: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_term_title" />
+
+    <TextView
+        android:id="@+id/label_term_end_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="End Date: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_term_start_date" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_courses"
+        android:layout_width="409dp"
+        android:layout_height="672dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_term_end_date_output" />
+
+    <TextView
+        android:id="@+id/label_term_start_date_output"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="label_term_start_date_output"
+        app:layout_constraintStart_toEndOf="@+id/label_term_start_date"
+        app:layout_constraintTop_toBottomOf="@+id/label_term_title" />
+
+    <TextView
+        android:id="@+id/label_term_end_date_output"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="label_term_end_date_output"
+        app:layout_constraintStart_toEndOf="@+id/label_term_end_date"
+        app:layout_constraintTop_toBottomOf="@+id/label_term_start_date" />
 </androidx.constraintlayout.widget.ConstraintLayout>
