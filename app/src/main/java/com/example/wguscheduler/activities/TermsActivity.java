@@ -3,12 +3,10 @@ package com.example.wguscheduler.activities;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.wguscheduler.MainActivity;
 import com.example.wguscheduler.entities.TermEntity;
 import com.example.wguscheduler.ui.TermAdapter;
 import com.example.wguscheduler.viewmodel.TermViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,7 +44,7 @@ public class TermsActivity extends AppCompatActivity {
 
         // add the recycler view for displaying the terms and initialize the view model
         mTermViewModel = new ViewModelProvider(this).get(TermViewModel.class);
-        RecyclerView recyclerView = findViewById(R.id.recycler_term);
+        RecyclerView recyclerView = findViewById(R.id.recycler_course);
         final TermAdapter termAdapter = new TermAdapter(this);
         recyclerView.setAdapter(termAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
