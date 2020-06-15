@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.wguscheduler.entities.CourseEntity;
 import com.example.wguscheduler.entities.TermEntity;
+import com.example.wguscheduler.utilities.CourseSampleData;
 import com.example.wguscheduler.utilities.TermSampleData;
 
 import java.text.ParseException;
@@ -18,6 +19,7 @@ public class SchedulerRepository {
     private static SchedulerRepository mSchedulerRepository;
 
     private LiveData<List<TermEntity>> mAllTerms;
+    private LiveData<List<CourseEntity>> mAllCourses;
     private SchedulerDatabase mSchedulerDatabase;
     //executor to run only one thread, in order
     private Executor executor = Executors.newSingleThreadExecutor();
@@ -38,12 +40,13 @@ public class SchedulerRepository {
     private SchedulerRepository(Context context){
         mSchedulerDatabase = SchedulerDatabase.getDatabase(context);
         mAllTerms = mSchedulerDatabase.termDAO().getTerms();
-
+        mAllCourses = mSchedulerDatabase.courseDAO().getCourses();
     }
 
     public LiveData<List<TermEntity>> getAllTerms() {
         return mAllTerms;
     }
+    public LiveData<List<CourseEntity>> getAllCourses(){ return mAllCourses;}
 
     public void addSampleData() {
 
@@ -53,6 +56,7 @@ public class SchedulerRepository {
 
                 try {
                     mSchedulerDatabase.termDAO().insertAll(TermSampleData.getTerms());
+                    mSchedulerDatabase.courseDAO().insertAll(CourseSampleData.getCourses());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -60,4 +64,6 @@ public class SchedulerRepository {
         });
 
     }
+
+
 }

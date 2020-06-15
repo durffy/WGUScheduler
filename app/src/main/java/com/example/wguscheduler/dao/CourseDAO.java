@@ -10,14 +10,19 @@ import androidx.room.Update;
 
 import com.example.wguscheduler.entities.CourseEntity;
 
+import java.util.List;
+
 @Dao
 public interface CourseDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertCourse(CourseEntity course);
 
-    @Query("SELECT * FROM course_table WHERE term_id LIKE :termId")
-    LiveData<CourseEntity> getTermCourses(int termId);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAll(List<CourseEntity> courses);
+
+    @Query("SELECT * FROM course_table")
+    LiveData<List<CourseEntity>> getCourses();
 
     @Update
     void updateCourse(CourseEntity course);
