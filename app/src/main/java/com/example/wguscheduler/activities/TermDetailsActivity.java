@@ -30,8 +30,6 @@ public class TermDetailsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //TODO: intent for Course
-        //TODO: get all courses and filter down the courses by the intent extras
         loadTermDetails();
 
         Button buttonCourses = findViewById(R.id.button_courses);
@@ -46,8 +44,7 @@ public class TermDetailsActivity extends AppCompatActivity {
     }
 
     /*
-    set the fields from the intent extras
-
+        set the fields from the intent extras
      */
     public void loadTermDetails(){
         textViewTermTitle = findViewById(R.id.label_term_title);
