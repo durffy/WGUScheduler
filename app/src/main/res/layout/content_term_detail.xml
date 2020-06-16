@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/label_term_title"
+        android:id="@+id/text_course_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -19,44 +19,44 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/label_term_start_date"
+        android:id="@+id/text_course_start_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Start Date: "
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_term_title" />
+        app:layout_constraintTop_toBottomOf="@+id/text_course_title" />
 
     <TextView
-        android:id="@+id/label_term_end_date"
+        android:id="@+id/text_course_end_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="End Date: "
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_term_start_date" />
+        app:layout_constraintTop_toBottomOf="@+id/text_course_start_date" />
 
     <TextView
-        android:id="@+id/label_term_start_date_output"
+        android:id="@+id/text_course_start_date_output"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="label_term_start_date_output"
-        app:layout_constraintStart_toEndOf="@+id/label_term_start_date"
-        app:layout_constraintTop_toBottomOf="@+id/label_term_title" />
+        app:layout_constraintStart_toEndOf="@+id/text_course_start_date"
+        app:layout_constraintTop_toBottomOf="@+id/text_course_title" />
 
     <TextView
-        android:id="@+id/label_term_end_date_output"
+        android:id="@+id/text_course_end_date_output"
         android:layout_width="0dp"
         android:layout_height="19dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="label_term_end_date_output"
-        app:layout_constraintStart_toEndOf="@+id/label_term_end_date"
-        app:layout_constraintTop_toBottomOf="@+id/label_term_start_date" />
+        app:layout_constraintStart_toEndOf="@+id/text_course_end_date"
+        app:layout_constraintTop_toBottomOf="@+id/text_course_start_date" />
 
     <Button
         android:id="@+id/button_courses"
@@ -67,5 +67,5 @@
         android:background="#FFFFFF"
         android:text="Courses"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_term_end_date_output" />
+        app:layout_constraintTop_toBottomOf="@+id/text_course_end_date_output" />
 </androidx.constraintlayout.widget.ConstraintLayout>
