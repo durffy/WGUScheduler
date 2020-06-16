@@ -9,11 +9,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.wguscheduler.R;
 
 public class CourseDetailsActivity extends AppCompatActivity {
-
+    private TextView textViewCourseTitle,
+            textViewStartDate,
+            textViewEndDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +27,8 @@ public class CourseDetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        loadCourseDetails();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +45,18 @@ public class CourseDetailsActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp(){
         onBackPressed();
         return true;
+    }
+
+    public void loadCourseDetails(){
+        textViewCourseTitle = findViewById(R.id.text_course_title);
+        textViewStartDate = findViewById(R.id.text_course_start_date_output);
+        textViewEndDate = findViewById(R.id.text_course_end_date_output);
+
+        if(getIntent().getStringExtra("title") != null){
+            textViewCourseTitle.setText(getIntent().getStringExtra("title"));
+            textViewStartDate.setText(getIntent().getStringExtra("startDate"));
+            textViewEndDate.setText(getIntent().getStringExtra("endDate"));
+        }
     }
 
 }
