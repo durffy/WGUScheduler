@@ -19,16 +19,16 @@ public class TermSampleData {
         TermEntity term;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
-        term = new TermEntity(1, "Spring 2020",  formatter.parse("1/1/2020"), formatter.parse("6/30/2020"));
+        term = new TermEntity(1, "Spring 2020",  formatter.parse("01/01/2020"), formatter.parse("06/30/2020"));
         terms.add(term);
 
-        term = new TermEntity(2, "Fall 2020", formatter.parse("7/1/2020"), formatter.parse("12/31/2020"));
+        term = new TermEntity(2, "Fall 2020", formatter.parse("07/1/2020"), formatter.parse("12/31/2020"));
         terms.add(term);
 
-        term = new TermEntity(3, "Spring 2021", formatter.parse("1/1/2020"), formatter.parse("6/30/2020"));
+        term = new TermEntity(3, "Spring 2021", formatter.parse("01/01/2021"), formatter.parse("06/30/2021"));
         terms.add(term);
 
-        term = new TermEntity(4, "Fall 2021", formatter.parse("7/1/2020"), formatter.parse("12/31/2020"));
+        term = new TermEntity(4, "Fall 2021", formatter.parse("07/01/2021"), formatter.parse("12/31/2021"));
         terms.add(term);
 
         return terms;
