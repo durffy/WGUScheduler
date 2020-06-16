@@ -12,7 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wguscheduler.R;
-import com.example.wguscheduler.activities.CoursesActivity;
+import com.example.wguscheduler.activities.CourseDetailsActivity;
 import com.example.wguscheduler.entities.CourseEntity;
 
 import java.text.SimpleDateFormat;
@@ -24,8 +24,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 
         //create the variables to be referenced latter here, these should be all of the views that are in the recycler list
         private final TextView mCourseTextTitle;
-        private final TextView mCourseStartDate;
-        private final TextView mCourseEndDate;
         private final CardView mCourseCardItem;
 
         private ViewHolder(View itemView){
@@ -33,14 +31,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 
             mCourseTextTitle = itemView.findViewById(R.id.text_course_title_output);
             mCourseCardItem = itemView.findViewById(R.id.card_course_item);
-            mCourseStartDate = itemView.findViewById(R.id.text_course_start_date_output);
-            mCourseEndDate = itemView.findViewById(R.id.text_course_end_date_output);;
 
             //onclick event for handling clicking terms in the terms activity
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 final CourseEntity current = mCourses.get(position);
-                Intent intent = new Intent(context, CoursesActivity.class);
+                Intent intent = new Intent(context, CourseDetailsActivity.class);
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
                 //details of the term class to the intent
@@ -63,7 +59,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     private List<CourseEntity> mCourses = new ArrayList<>();
 
     // inflate the context
-
     public CourseAdapter(Context context, List<CourseEntity> courses) {
         this.context = context;
         mInflater = LayoutInflater.from(context);
@@ -93,20 +88,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     // Bind the Textview to the viewholder, e.g. display elements.
     @Override
     public void onBindViewHolder(CourseAdapter.ViewHolder termViewHolder, int position) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
         if(mCourses != null){
             CourseEntity course = mCourses.get(position);
             CardView cardView = termViewHolder.mCourseCardItem;
             TextView textViewTitle = termViewHolder.mCourseTextTitle;
-            TextView textViewStart = termViewHolder.mCourseStartDate;
-            TextView textViewEnd = termViewHolder.mCourseEndDate;
-
             textViewTitle.setText(course.getTitle());
-            textViewStart.setText(formatter.format(course.getStartDate()));
-            textViewEnd.setText(formatter.format(course.getEndDate()));
-
-
         }else {
 
             termViewHolder.mCourseTextTitle.setText("No Terms!");
