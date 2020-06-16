@@ -26,6 +26,8 @@ public class TermDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_term_detail);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         loadTermDetails();
 
@@ -52,6 +54,13 @@ public class TermDetailsActivity extends AppCompatActivity {
             textViewStartDate.setText(getIntent().getStringExtra("startDate"));
             textViewEndDate.setText(getIntent().getStringExtra("endDate"));
         }
+    }
+
+    // add support for going back a screen
+    @Override
+    public boolean onSupportNavigateUp(){
+        onBackPressed();
+        return true;
     }
 
 }
