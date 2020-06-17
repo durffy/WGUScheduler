@@ -16,7 +16,8 @@ import com.example.wguscheduler.R;
 public class CourseDetailsActivity extends AppCompatActivity {
     private TextView textViewCourseTitle,
             textViewStartDate,
-            textViewEndDate;
+            textViewEndDate,
+            textViewStatus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +52,13 @@ public class CourseDetailsActivity extends AppCompatActivity {
         textViewCourseTitle = findViewById(R.id.text_course_title);
         textViewStartDate = findViewById(R.id.text_course_start_date_output);
         textViewEndDate = findViewById(R.id.text_course_end_date_output);
+        textViewStatus = findViewById(R.id.text_course_status_output);
 
         if(getIntent().getStringExtra("title") != null){
             textViewCourseTitle.setText(getIntent().getStringExtra("title"));
             textViewStartDate.setText(getIntent().getStringExtra("startDate"));
             textViewEndDate.setText(getIntent().getStringExtra("endDate"));
+            textViewStatus.setText(getIntent().getStringExtra("status"));
         }
     }
 

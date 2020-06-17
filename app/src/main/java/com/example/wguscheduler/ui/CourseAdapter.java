@@ -43,6 +43,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
                 intent.putExtra("courseId", current.getId());
                 intent.putExtra("mentorId", current.getMentorId());
                 intent.putExtra("termId", current.getTermId());
+                intent.putExtra("status", current.getStatus());
                 intent.putExtra("title",current.getTitle());
                 intent.putExtra("startDate",formatter.format(current.getStartDate()));
                 intent.putExtra("endDate",formatter.format(current.getEndDate()));
