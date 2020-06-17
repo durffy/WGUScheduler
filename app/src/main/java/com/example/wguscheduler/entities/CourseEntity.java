@@ -5,7 +5,6 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import java.io.IOException;
 import java.util.Date;
 
 @Entity(tableName = "course_table")
