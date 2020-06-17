@@ -43,7 +43,6 @@ public class CoursesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        //TODO: menu to load the sample data
         //TODO: intent to load the related courses
 
         // add the recycler view for displaying the terms and initialize the view model

@@ -32,14 +32,14 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
             mCourseTextTitle = itemView.findViewById(R.id.text_course_title_output);
             mCourseCardItem = itemView.findViewById(R.id.card_course_item);
 
-            //onclick event for handling clicking terms in the terms activity
+            //onclick event for handling clicking course in the course activity
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 final CourseEntity current = mCourses.get(position);
                 Intent intent = new Intent(context, CourseDetailsActivity.class);
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
-                //details of the term class to the intent
+                //details of the course class to the intent
                 intent.putExtra("courseId", current.getId());
                 intent.putExtra("mentorId", current.getMentorId());
                 intent.putExtra("termId", current.getTermId());
@@ -87,16 +87,16 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 
     // Bind the Textview to the viewholder, e.g. display elements.
     @Override
-    public void onBindViewHolder(CourseAdapter.ViewHolder termViewHolder, int position) {
+    public void onBindViewHolder(CourseAdapter.ViewHolder courseViewHolder, int position) {
 
         if(mCourses != null){
             CourseEntity course = mCourses.get(position);
-            CardView cardView = termViewHolder.mCourseCardItem;
-            TextView textViewTitle = termViewHolder.mCourseTextTitle;
+            CardView cardView = courseViewHolder.mCourseCardItem;
+            TextView textViewTitle = courseViewHolder.mCourseTextTitle;
             textViewTitle.setText(course.getTitle());
         }else {
 
-            termViewHolder.mCourseTextTitle.setText("No Terms!");
+            courseViewHolder.mCourseTextTitle.setText("No Courses!");
 
         }
 
@@ -107,7 +107,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         return mCourses.size();
     }
 
-    //update the data in the terms list
+    //update the data in the course list
     public void setCourses(List<CourseEntity> courses){
         mCourses = courses;
         notifyDataSetChanged();

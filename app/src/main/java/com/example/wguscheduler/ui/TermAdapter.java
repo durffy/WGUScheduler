@@ -64,7 +64,6 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
     private List<TermEntity> mTerms = new ArrayList<>();
 
     // inflate the context
-
     public TermAdapter(Context context, List<TermEntity> mTerms) {
         this.context = context;
         mInflater = LayoutInflater.from(context);
