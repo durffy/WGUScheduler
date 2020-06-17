@@ -1,6 +1,7 @@
 package com.example.wguscheduler.database;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -16,6 +17,7 @@ import java.util.concurrent.Executors;
 
 public class SchedulerRepository {
 
+    private static final String TAG = "SchedulerRepository";
     private static SchedulerRepository mSchedulerRepository;
 
     private LiveData<List<TermEntity>> mAllTerms;
@@ -57,6 +59,8 @@ public class SchedulerRepository {
                 try {
                     mSchedulerDatabase.termDAO().insertAll(TermSampleData.getTerms());
                     mSchedulerDatabase.courseDAO().insertAll(CourseSampleData.getCourses());
+                    Log.i(TAG, "addSampleData().run()" + CourseSampleData.getCourses());
+
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.io.IOException;
 import java.util.Date;
 
 @Entity(tableName = "course_table")
@@ -24,19 +25,37 @@ public class CourseEntity {
     @ColumnInfo(name = "title")
     private String mTitle;
 
+    @ColumnInfo(name = "status")
+    private String mStatus;
+
     @ColumnInfo(name = "start_date")
     private Date mStartDate;
 
     @ColumnInfo(name = "end_date")
     private Date mEndDate;
 
-    public CourseEntity(int mId, int mTermId, int mMentorId, String mTitle, Date mStartDate, Date mEndDate) {
+    public CourseEntity(int mId, int mTermId, int mMentorId, String mTitle, String mStatus, Date mStartDate, Date mEndDate) {
         this.mId = mId;
         this.mTermId = mTermId;
         this.mMentorId = mMentorId;
         this.mTitle = mTitle;
+        this.mStatus = mStatus;
         this.mStartDate = mStartDate;
         this.mEndDate = mEndDate;
+    }
+
+    public String getCourse() {
+
+        String course = String.format("\n" +
+                        "\nCourse ID: %s\n\r" +
+                        "TermId: %s\n\r" +
+                        "Mentor Id: %s\n\r" +
+                        "Title: %s\n\r" +
+                        "Status: %s\n\r" +
+                        "Start Date: %s\n\r" +
+                        "End Date: %s\n\r",
+                mId, mTermId, mMentorId, mTitle, mStatus, mStartDate, mEndDate);
+        return course;
     }
 
     public int getId() {
@@ -87,4 +106,11 @@ public class CourseEntity {
         this.mTitle = Title;
     }
 
+    public String getStatus() {
+        return mStatus;
+    }
+
+    public void setStatus(String mStatus) {
+        this.mStatus = mStatus;
+    }
 }
