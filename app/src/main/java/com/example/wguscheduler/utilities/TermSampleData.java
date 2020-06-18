@@ -17,7 +17,7 @@ public class TermSampleData {
         List<TermEntity> terms = new ArrayList<>();
 
         TermEntity term;
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");;
 
         term = new TermEntity(1, "Spring 2020",  formatter.parse("01/01/2020"), formatter.parse("06/30/2020"));
         terms.add(term);
