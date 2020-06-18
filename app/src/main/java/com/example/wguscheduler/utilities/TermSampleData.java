@@ -1,13 +1,9 @@
 package com.example.wguscheduler.utilities;
 
-import com.example.wguscheduler.entities.CourseEntity;
 import com.example.wguscheduler.entities.TermEntity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
