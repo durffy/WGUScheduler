@@ -55,6 +55,7 @@ public class TermsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TermsActivity.this, TermDetailsActivity.class);
+
                 startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
             }
         });
@@ -65,6 +66,7 @@ public class TermsActivity extends AppCompatActivity {
                @Override
                public void onChanged(@Nullable final List<TermEntity> terms) {
                    // Update the cached copy of the words in the adapter.
+
                    termAdapter.setTerms(terms);
                }
            });

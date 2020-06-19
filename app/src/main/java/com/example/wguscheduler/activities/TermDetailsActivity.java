@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import com.example.wguscheduler.R;
 
 public class TermDetailsActivity extends AppCompatActivity {
     private static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+    private static final String TAG = "TermDetailsActivity";
     private TextView textViewTermTitle,
             textViewStartDate,
             textViewEndDate;
@@ -33,9 +35,12 @@ public class TermDetailsActivity extends AppCompatActivity {
 
         Button buttonCourses = findViewById(R.id.button_courses);
         buttonCourses.setOnClickListener(new View.OnClickListener() {
+            //on click pass set the intent for the term ID and start the activity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TermDetailsActivity.this, CoursesActivity.class);
+                Log.d(TAG, "onClick(): getIntent termId: " + getIntent().getIntExtra("termId", 0));
+                intent.putExtra("termId", getIntent().getIntExtra("termId", 0));
                 startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
             }
         });

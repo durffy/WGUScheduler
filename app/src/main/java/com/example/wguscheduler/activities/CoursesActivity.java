@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,9 +28,11 @@ import android.view.View;
 
 import com.example.wguscheduler.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CoursesActivity extends AppCompatActivity {
+    private static final String TAG = "CourseActivity";
     private CourseViewModel mCourseViewModel;
     private static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     @Override
@@ -43,7 +46,6 @@ public class CoursesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        //TODO: intent to load the related courses
 
         // add the recycler view for displaying the terms and initialize the view model
         mCourseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
@@ -61,13 +63,27 @@ public class CoursesActivity extends AppCompatActivity {
             }
         });
 
-        //observer changes to the terms
+        //observer changes to course_table
+        //TODO: intent to load the related courses
         if(mCourseViewModel.getAllCourses() != null) {
+
             mCourseViewModel.getAllCourses().observe(this, new Observer<List<CourseEntity>>() {
+
                 @Override
                 public void onChanged(@Nullable final List<CourseEntity> courses) {
                     // Update the cached copy of the words in the adapter.
+                    //filter the list of courses to items that match the TermId
+                    List<CourseEntity> filteredCourses = new ArrayList<>();
                     courseAdapter.setCourses(courses);
+                    for (CourseEntity c : courses) {
+                        Log.d(TAG, "onChanged(): c:course "+c.getCourse());
+                        Log.d(TAG, "onChanged(): getIntent termId: " + getIntent().getIntExtra("termId", 0));
+                        if(c.getTermId()== getIntent().getIntExtra("termId", 0)){
+                            filteredCourses.add(c);
+                        }
+                    }
+                    courseAdapter.setCourses(filteredCourses);
+
                 }
             });
         }

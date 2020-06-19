@@ -2,6 +2,7 @@ package com.example.wguscheduler.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder>{
+    private static final String TAG = "CourseAdapter";
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         //create the variables to be referenced latter here, these should be all of the views that are in the recycler list
