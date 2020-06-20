@@ -9,9 +9,8 @@
     <string name="terms_text_label">Terms List</string>
     <string name="title_activity_courses">Course List</string>
     <string name="title_activity_course_details">Course Details</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="title_activity_assessment">Assessment List</string>
+
 
 
 </resources>
