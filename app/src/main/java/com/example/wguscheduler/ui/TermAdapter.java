@@ -43,7 +43,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
                 int position = getAdapterPosition();
                 final TermEntity current = mTerms.get(position);
                 Intent intent = new Intent(context, TermDetailsActivity.class);
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
                 //details of the term class to the intent
                 intent.putExtra("termId", current.getId());

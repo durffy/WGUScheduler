@@ -40,7 +40,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
                 int position = getAdapterPosition();
                 final CourseEntity current = mCourses.get(position);
                 Intent intent = new Intent(context, CourseDetailsActivity.class);
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
                 //details of the course class to the intent
                 intent.putExtra("courseId", current.getId());
@@ -50,6 +50,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
                 intent.putExtra("title",current.getTitle());
                 intent.putExtra("startDate",formatter.format(current.getStartDate()));
                 intent.putExtra("endDate",formatter.format(current.getEndDate()));
+
 
                 context.startActivity(intent);
 
