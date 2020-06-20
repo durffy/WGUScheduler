@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Start Date: "
+        android:text="Start Date:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_course_status" />
 
@@ -42,7 +42,7 @@
         android:id="@+id/text_course_start_date_output"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="17dp"
         android:layout_marginTop="8dp"
         android:text="text_course_start_date_output"
         app:layout_constraintStart_toEndOf="@+id/text_course_start_date"
@@ -52,7 +52,7 @@
         android:id="@+id/text_course_end_date_output"
         android:layout_width="0dp"
         android:layout_height="19dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:text="text_course_end_date_output"
         app:layout_constraintStart_toEndOf="@+id/text_course_end_date"
@@ -72,10 +72,81 @@
         android:id="@+id/text_course_status_output"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="8dp"
         android:text="text_course_status_output"
         app:layout_constraintStart_toEndOf="@+id/text_course_status"
         app:layout_constraintTop_toBottomOf="@+id/text_course_title" />
+
+    <TextView
+        android:id="@+id/text_mentor_name_output"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="text_mentor_name_output"
+        app:layout_constraintStart_toEndOf="@+id/text_mentor_name"
+        app:layout_constraintTop_toBottomOf="@+id/text_mentor_title" />
+
+    <TextView
+        android:id="@+id/text_mentor_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Mentor: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_mentor_title" />
+
+    <TextView
+        android:id="@+id/text_mentor_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_mentor_name" />
+
+    <TextView
+        android:id="@+id/text_mentor_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Mentor"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_course_end_date" />
+
+    <TextView
+        android:id="@+id/text_mentor_email_output"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="8dp"
+        android:text="text_mentor_email_output"
+        app:layout_constraintStart_toEndOf="@+id/text_mentor_email"
+        app:layout_constraintTop_toBottomOf="@+id/text_mentor_name" />
+
+    <TextView
+        android:id="@+id/text_mentor_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Phone: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_mentor_email" />
+
+    <TextView
+        android:id="@+id/text_mentor_phone_output"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="8dp"
+        android:text="text_mentor_phone_output"
+        app:layout_constraintStart_toEndOf="@+id/text_mentor_phone"
+        app:layout_constraintTop_toBottomOf="@+id/text_mentor_email" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
