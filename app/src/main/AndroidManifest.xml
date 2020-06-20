@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.AssessmentActivity"
+            android:name=".activities.AssessmentsActivity"
             android:label="@string/title_activity_assessment"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
