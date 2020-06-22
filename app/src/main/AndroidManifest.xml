@@ -14,6 +14,10 @@
             android:label="@string/title_activity_assessment"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
+            android:name=".activities.AssessmentDetailActivity"
+            android:label="@string/title_activity_assessment_details"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".activities.CourseDetailsActivity"
             android:label="@string/title_activity_course_details"
             android:theme="@style/AppTheme.NoActionBar" />

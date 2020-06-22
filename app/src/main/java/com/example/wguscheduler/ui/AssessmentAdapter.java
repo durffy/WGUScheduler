@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.PrimaryKey;
 
 import com.example.wguscheduler.R;
+import com.example.wguscheduler.activities.AssessmentDetailActivity;
 import com.example.wguscheduler.activities.AssessmentsActivity;
 import com.example.wguscheduler.entities.AssessmentEntity;
 
@@ -36,7 +37,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.Vi
                 int position = getAdapterPosition();
                 final AssessmentEntity current = mAssessments.get(position);
                 //TODO: set to AssessmentDetailActivity when configured
-                Intent intent = new Intent(context, AssessmentsActivity.class);
+                Intent intent = new Intent(context, AssessmentDetailActivity.class);
 
                 //details of the course class to the intent
                 intent.putExtra("assessmentId", current.getId());
