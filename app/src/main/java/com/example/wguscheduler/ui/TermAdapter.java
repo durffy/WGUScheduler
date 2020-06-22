@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
-TODO:
+done:
     issue loading multiple terms from Utilities.SampleData, likely that the viewholder is setup
     incorrectly. Look into this.
  */

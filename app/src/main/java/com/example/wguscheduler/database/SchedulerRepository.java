@@ -5,10 +5,12 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.wguscheduler.entities.AssessmentEntity;
 import com.example.wguscheduler.entities.CourseEntity;
 import com.example.wguscheduler.entities.TermEntity;
 import com.example.wguscheduler.utilities.CourseSampleData;
 import com.example.wguscheduler.utilities.TermSampleData;
+import com.example.wguscheduler.utilities.AssessmentSampleData;
 
 import java.text.ParseException;
 import java.util.List;
@@ -22,6 +24,7 @@ public class SchedulerRepository {
 
     private LiveData<List<TermEntity>> mAllTerms;
     private LiveData<List<CourseEntity>> mAllCourses;
+    private LiveData<List<AssessmentEntity>> mAllAssessments;
     private SchedulerDatabase mSchedulerDatabase;
     //executor to run only one thread, in order
     private Executor executor = Executors.newSingleThreadExecutor();
@@ -38,17 +41,20 @@ public class SchedulerRepository {
         return mSchedulerRepository;
     }
 
-
     private SchedulerRepository(Context context){
         mSchedulerDatabase = SchedulerDatabase.getDatabase(context);
         mAllTerms = mSchedulerDatabase.termDAO().getTerms();
         mAllCourses = mSchedulerDatabase.courseDAO().getCourses();
+        mAllAssessments = mSchedulerDatabase.assessmentDAO().getAssessments();
     }
 
     public LiveData<List<TermEntity>> getAllTerms() {
         return mAllTerms;
     }
     public LiveData<List<CourseEntity>> getAllCourses(){ return mAllCourses;}
+    public LiveData<List<AssessmentEntity>> getAllAssessments() {
+        return mAllAssessments;
+    }
 
     public void addSampleData() {
 
@@ -59,6 +65,7 @@ public class SchedulerRepository {
                 try {
                     mSchedulerDatabase.termDAO().insertAll(TermSampleData.getTerms());
                     mSchedulerDatabase.courseDAO().insertAll(CourseSampleData.getCourses());
+                    mSchedulerDatabase.assessmentDAO().insertAll(AssessmentSampleData.getAssessments());
                     Log.i(TAG, "addSampleData().run()" + CourseSampleData.getCourses());
 
                 } catch (ParseException e) {

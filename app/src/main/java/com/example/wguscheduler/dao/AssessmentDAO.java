@@ -10,17 +10,27 @@ import androidx.room.Update;
 
 import com.example.wguscheduler.entities.AssessmentEntity;
 
+import java.util.List;
+
 @Dao
 public interface AssessmentDAO {
+
+    //create
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertCourse(AssessmentEntity assessment);
+    void insertAll(List<AssessmentEntity> assessments);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAssessment(AssessmentEntity assessment);
+
+    //read
     @Query("SELECT * FROM assessment_table")
-    LiveData<AssessmentEntity> getAssessments();
+    LiveData<List<AssessmentEntity>> getAssessments();
 
+    //update
     @Update
     void updateAssessment(AssessmentEntity assessment);
 
+    //delete
     @Delete
     void deleteAssessment(AssessmentEntity assessment);
 }
