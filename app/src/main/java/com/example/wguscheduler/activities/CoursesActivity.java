@@ -64,7 +64,7 @@ public class CoursesActivity extends AppCompatActivity {
         });
 
         //observer changes to course_table
-        //TODO: intent to load the related courses
+        //done: intent to load the related courses
         if(mCourseViewModel.getAllCourses() != null) {
 
             mCourseViewModel.getAllCourses().observe(this, new Observer<List<CourseEntity>>() {
