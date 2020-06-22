@@ -24,17 +24,26 @@ public class AssessmentDetailActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         loadAssessmentDetails();
+
+    }
+
+    // add support for going back a screen
+    @Override
+    public boolean onSupportNavigateUp(){
+        onBackPressed();
+        return true;
     }
 
     private void loadAssessmentDetails() {
         textViewAssessmentTitle = findViewById(R.id.text_assessment_title);
-        textViewAssessmentDetails = findViewById(R.id.text_assessment_type_output);
+        textViewAssessmentType = findViewById(R.id.text_assessment_type_output);
         textViewAssessmentDetails = findViewById(R.id.text_assessment_description_output);
         if(getIntent().getStringExtra("title") != null){
             textViewAssessmentTitle.setText(getIntent().getStringExtra("title"));
-            textViewAssessmentDetails.setText(getIntent().getStringExtra("type"));
+            textViewAssessmentType.setText(getIntent().getStringExtra("type"));
             textViewAssessmentDetails.setText(getIntent().getStringExtra("description"));
         }
     }
+
 
 }
