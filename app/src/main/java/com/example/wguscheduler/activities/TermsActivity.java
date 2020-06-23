@@ -42,8 +42,10 @@ public class TermsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        // add the recycler view for displaying the terms and initialize the view model
+        // initialize the view model
         mTermViewModel = new ViewModelProvider(this).get(TermViewModel.class);
+
+        // initialize the recyclerview
         RecyclerView recyclerView = findViewById(R.id.recycler_course);
         final TermAdapter termAdapter = new TermAdapter(this);
         recyclerView.setAdapter(termAdapter);
