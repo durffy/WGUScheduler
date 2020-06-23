@@ -3,11 +3,16 @@ package com.example.wguscheduler.activities;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.wguscheduler.entities.MentorEntity;
+import com.example.wguscheduler.viewmodel.MentorViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.View;
 import android.widget.Button;
@@ -15,12 +20,18 @@ import android.widget.TextView;
 
 import com.example.wguscheduler.R;
 
+import java.util.List;
+
 public class CourseDetailsActivity extends AppCompatActivity {
-    private TextView textViewCourseTitle,
-            textViewStartDate,
-            textViewEndDate,
-            textViewStatus;
+
+            //course textViews
+    private TextView textViewCourseTitle, textViewStartDate, textViewEndDate, textViewStatus,
+
+            //mentor textViews
+            textViewMentor, textViewMentorPhone, textViewMentorEmail;
+    private MentorViewModel mMentorViewModel;
     private static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +45,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         loadCourseDetails();
+        loadMentorDetails();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +86,37 @@ public class CourseDetailsActivity extends AppCompatActivity {
             textViewEndDate.setText(getIntent().getStringExtra("endDate"));
             textViewStatus.setText(getIntent().getStringExtra("status"));
         }
+    }
+    private void loadMentorDetails() {
+        mMentorViewModel = new ViewModelProvider(this).get(MentorViewModel.class);
+        textViewMentor = findViewById(R.id.text_mentor_name_output);
+        textViewMentorPhone =findViewById(R.id.text_mentor_phone_output);
+        textViewMentorEmail =findViewById(R.id.text_mentor_email_output);
+
+        if(mMentorViewModel.getAllMentors() != null) {
+
+            mMentorViewModel.getAllMentors().observe(this, new Observer<List<MentorEntity>>() {
+
+                @Override
+                public void onChanged(@Nullable final List<MentorEntity> mentors) {
+                    // Update the cached copy of the words in the adapter.
+
+                    for (MentorEntity m : mentors) {
+
+                        if(m.getId()== getIntent().getIntExtra("mentorId", 0)){
+                            String name = m.getFirstName() + " " + m.getLastName();
+                            textViewMentor.setText(name);
+                            textViewMentorPhone.setText(m.getPhone());
+                            textViewMentorEmail.setText(m.getEmail());
+
+                        }
+                    }
+
+
+                }
+            });
+        }
+
     }
 
 }

@@ -36,7 +36,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.Vi
 
                 int position = getAdapterPosition();
                 final AssessmentEntity current = mAssessments.get(position);
-                //TODO: set to AssessmentDetailActivity when configured
+                //done: set to AssessmentDetailActivity when configured
                 Intent intent = new Intent(context, AssessmentDetailActivity.class);
 
                 //details of the course class to the intent
