@@ -56,8 +56,7 @@ public class TermsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TermsActivity.this, TermDetailsActivity.class);
-
+                Intent intent = new Intent(TermsActivity.this, TermAddActivity.class);
                 startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
             }
         });
