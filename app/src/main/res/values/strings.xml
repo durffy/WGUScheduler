@@ -11,5 +11,7 @@
     <string name="title_activity_course_details">Course Details</string>
     <string name="title_activity_assessment">Assessment List</string>
     <string name="title_activity_assessment_details">Assessment Details</string>
+    <string name="title_activity_term_details">Term Details</string>
+    <string name="title_activity_term_add">Term Add</string>
 
 </resources>
