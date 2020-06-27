@@ -4,6 +4,7 @@ package com.example.wguscheduler.entities;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
@@ -11,7 +12,7 @@ import java.util.Date;
 @Entity(tableName = "term_table")
 public class TermEntity {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name="id")
     private int mId;
@@ -27,6 +28,13 @@ public class TermEntity {
 
     public TermEntity(int mId, String mTitle, Date mStartDate, Date mEndDate) {
         this.mId = mId;
+        this.mTitle = mTitle;
+        this.mStartDate = mStartDate;
+        this.mEndDate = mEndDate;
+    }
+
+    @Ignore
+    public TermEntity(String mTitle, Date mStartDate, Date mEndDate) {
         this.mTitle = mTitle;
         this.mStartDate = mStartDate;
         this.mEndDate = mEndDate;

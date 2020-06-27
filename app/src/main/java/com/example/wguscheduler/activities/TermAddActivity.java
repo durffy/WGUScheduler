@@ -58,12 +58,11 @@ public class TermAddActivity extends AppCompatActivity {
 
     private void saveTerm() throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        int id = getIntent().getIntExtra("lastTermId", 0);
         String title = mTermTitle.getText().toString();
         Date start = formatter.parse(mTermStart.getText().toString());
         Date end = formatter.parse(mTermEnd.getText().toString());
 
-        TermEntity term = new TermEntity(id, title, start, end);
+        TermEntity term = new TermEntity(title, start, end);
         mTermViewModel.saveTerm(term);
         onSupportNavigateUp();
     }
