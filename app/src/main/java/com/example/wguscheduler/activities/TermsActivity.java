@@ -51,17 +51,6 @@ public class TermsActivity extends AppCompatActivity {
         recyclerView.setAdapter(termAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //intent for activity switching
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(TermsActivity.this, TermDetailsActivity.class);
-
-                startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
-            }
-        });
-
         //observer changes to the terms
        if(mTermViewModel.getAllTerms() != null) {
            mTermViewModel.getAllTerms().observe(this, new Observer<List<TermEntity>>() {
@@ -73,6 +62,16 @@ public class TermsActivity extends AppCompatActivity {
                }
            });
        }
+
+        //intent for activity switching
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TermsActivity.this, TermAddActivity.class);
+                startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+            }
+        });
 
     }
 

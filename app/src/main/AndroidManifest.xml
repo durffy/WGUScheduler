@@ -27,7 +27,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.TermDetailsActivity"
-            android:label="@string/title_activity_term_modify"
+            android:label="@string/title_activity_term_details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.TermAddActivity"
+            android:label="@string/title_activity_term_add"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.CurrentTermActivity"

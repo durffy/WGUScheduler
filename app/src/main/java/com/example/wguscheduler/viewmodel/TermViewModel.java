@@ -21,6 +21,12 @@ public class TermViewModel extends AndroidViewModel {
         mAllTerms = mSchedulerRepository.getAllTerms();
     }
 
+    //create
+    public void saveTerm(TermEntity term){
+        mSchedulerRepository.saveTerm(term);
+    }
+
+    //read
     public LiveData<List<TermEntity>> getAllTerms() {
         return mAllTerms;
     }

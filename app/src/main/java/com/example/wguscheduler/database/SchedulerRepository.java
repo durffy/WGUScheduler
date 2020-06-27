@@ -54,15 +54,16 @@ public class SchedulerRepository {
         mAllMentors = mSchedulerDatabase.mentorDAO().getMentors();
     }
 
-    public LiveData<List<TermEntity>> getAllTerms() {
-        return mAllTerms;
-    }
-    public LiveData<List<CourseEntity>> getAllCourses(){ return mAllCourses;}
-    public LiveData<List<AssessmentEntity>> getAllAssessments() {
-        return mAllAssessments;
-    }
-    public LiveData<List<MentorEntity>> getAllMentors() {
-        return mAllMentors;
+
+    //create
+    public void saveTerm(TermEntity term){
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                mSchedulerDatabase.termDAO().insertTerm(term);
+            }
+
+        });
     }
 
     public void addSampleData() {
@@ -85,6 +86,20 @@ public class SchedulerRepository {
         });
 
     }
+
+    //read
+    public LiveData<List<TermEntity>> getAllTerms() {
+        return mAllTerms;
+    }
+    public LiveData<List<CourseEntity>> getAllCourses(){ return mAllCourses;}
+    public LiveData<List<AssessmentEntity>> getAllAssessments() {
+        return mAllAssessments;
+    }
+    public LiveData<List<MentorEntity>> getAllMentors() {
+        return mAllMentors;
+    }
+
+
 
 
 }
