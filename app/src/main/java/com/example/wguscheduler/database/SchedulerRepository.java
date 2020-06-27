@@ -56,8 +56,14 @@ public class SchedulerRepository {
 
 
     //create
-    public void addTerm(TermEntity term){
-        mSchedulerDatabase.termDAO().insertTerm(term);
+    public void saveTerm(TermEntity term){
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                mSchedulerDatabase.termDAO().insertTerm(term);
+            }
+
+        });
     }
 
     public void addSampleData() {
