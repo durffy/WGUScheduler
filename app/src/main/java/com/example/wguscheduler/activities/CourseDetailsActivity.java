@@ -26,9 +26,9 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
             //course textViews
     private TextView textViewCourseTitle, textViewStartDate, textViewEndDate, textViewStatus,
-
             //mentor textViews
             textViewMentor, textViewMentorPhone, textViewMentorEmail;
+
     private MentorViewModel mMentorViewModel;
     private static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
 
