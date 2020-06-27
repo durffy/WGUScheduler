@@ -22,8 +22,8 @@ public class TermViewModel extends AndroidViewModel {
     }
 
     //create
-    public void addTerm(TermEntity term){
-        mSchedulerRepository.addTerm(term);
+    public void saveTerm(TermEntity term){
+        mSchedulerRepository.saveTerm(term);
     }
 
     //read
