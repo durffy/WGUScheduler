@@ -1,5 +1,6 @@
 package com.example.wguscheduler.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.wguscheduler.entities.CourseEntity;
@@ -58,8 +59,8 @@ public class CoursesActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(CoursesActivity.this, CourseAddActivity.class);
+                startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
             }
         });
 
