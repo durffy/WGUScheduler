@@ -60,6 +60,7 @@ public class CoursesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CoursesActivity.this, CourseAddActivity.class);
+                intent.putExtra("termId", getIntent().getIntExtra("termId", 0));
                 startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
             }
         });
