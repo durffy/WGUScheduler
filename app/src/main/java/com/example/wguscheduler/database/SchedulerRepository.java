@@ -55,12 +55,25 @@ public class SchedulerRepository {
     }
 
 
+    //CRUD
+
     //create
     public void saveTerm(TermEntity term){
         executor.execute(new Runnable() {
             @Override
             public void run() {
                 mSchedulerDatabase.termDAO().insertTerm(term);
+            }
+
+        });
+    }
+
+    public void saveCourse(CourseEntity course) {
+
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                mSchedulerDatabase.courseDAO().insertCourse(course);
             }
 
         });
@@ -98,7 +111,6 @@ public class SchedulerRepository {
     public LiveData<List<MentorEntity>> getAllMentors() {
         return mAllMentors;
     }
-
 
 
 

@@ -20,9 +20,17 @@ public class CourseViewModel extends AndroidViewModel {
         mAllCourses = mSchedulerRepository.getAllCourses();
     }
 
+    //create
+    public void saveCourse(CourseEntity course){
+        mSchedulerRepository.saveCourse(course);
+    }
+
+    //read
     public LiveData<List<CourseEntity>> getAllCourses() {
         return mAllCourses;
     }
+
+
 
     public void addSampleData() {
         mSchedulerRepository.addSampleData();
