@@ -26,6 +26,10 @@
             android:label="@string/title_activity_courses"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".activities.CourseAddActivity"
+            android:label="@string/title_activity_courses"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activities.TermDetailsActivity"
             android:label="@string/title_activity_term_details"
             android:theme="@style/AppTheme.NoActionBar" />

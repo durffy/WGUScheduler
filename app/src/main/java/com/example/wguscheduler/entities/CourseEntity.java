@@ -3,13 +3,14 @@ package com.example.wguscheduler.entities;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
 @Entity(tableName = "course_table")
 public class CourseEntity {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private int mId;
 
@@ -35,6 +36,16 @@ public class CourseEntity {
 
     public CourseEntity(int mId, int mTermId, int mMentorId, String mTitle, String mStatus, Date mStartDate, Date mEndDate) {
         this.mId = mId;
+        this.mTermId = mTermId;
+        this.mMentorId = mMentorId;
+        this.mTitle = mTitle;
+        this.mStatus = mStatus;
+        this.mStartDate = mStartDate;
+        this.mEndDate = mEndDate;
+    }
+
+    @Ignore
+    public CourseEntity(int mTermId, int mMentorId, String mTitle, String mStatus, Date mStartDate, Date mEndDate) {
         this.mTermId = mTermId;
         this.mMentorId = mMentorId;
         this.mTitle = mTitle;

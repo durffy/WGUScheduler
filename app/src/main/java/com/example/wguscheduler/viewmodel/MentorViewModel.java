@@ -23,10 +23,15 @@ public class MentorViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<MentorEntity>> getAllMentors(){
+
         return mAllMentors;
     }
 
     public void addSampleData(){
         mSchedulerRepository.addSampleData();
+    }
+
+    public void saveMentor(MentorEntity mMentor) {
+        mSchedulerRepository.saveMentor(mMentor);
     }
 }
