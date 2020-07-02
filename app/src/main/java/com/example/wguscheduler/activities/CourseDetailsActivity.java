@@ -47,15 +47,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
         loadCourseDetails();
         loadMentorDetails();
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         Button buttonAssessments = findViewById(R.id.button_assessments);
         buttonAssessments.setOnClickListener(new View.OnClickListener(){
             @Override
