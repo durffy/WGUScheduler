@@ -78,6 +78,15 @@ public class SchedulerRepository {
 
         });
     }
+    public void saveMentor(MentorEntity mMentor) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                mSchedulerDatabase.mentorDAO().insert(mMentor);
+            }
+
+        });
+    }
 
     public void addSampleData() {
 
