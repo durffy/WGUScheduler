@@ -10,8 +10,8 @@ import com.example.wguscheduler.R;
 
 public class AssessmentDetailActivity extends AppCompatActivity{
     private TextView textViewAssessmentTitle,
-        textViewAssessmentDetails,
-        textViewAssessmentType;
+        textViewAssessmentNotes,
+        textViewAssessmentScheduledDate;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +36,12 @@ public class AssessmentDetailActivity extends AppCompatActivity{
 
     private void loadAssessmentDetails() {
         textViewAssessmentTitle = findViewById(R.id.text_assessment_title);
-        textViewAssessmentType = findViewById(R.id.text_assessment_type_output);
-        textViewAssessmentDetails = findViewById(R.id.text_assessment_description_output);
+        textViewAssessmentScheduledDate = findViewById(R.id.text_assessment_scheduled_date_output);
+        textViewAssessmentNotes = findViewById(R.id.text_assessment_notes_output);
         if(getIntent().getStringExtra("title") != null){
             textViewAssessmentTitle.setText(getIntent().getStringExtra("title"));
-            textViewAssessmentType.setText(getIntent().getStringExtra("type"));
-            textViewAssessmentDetails.setText(getIntent().getStringExtra("description"));
+            textViewAssessmentScheduledDate.setText(getIntent().getStringExtra("scheduledDate"));
+            textViewAssessmentNotes.setText(getIntent().getStringExtra("notes"));
         }
     }
 
