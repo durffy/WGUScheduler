@@ -1,5 +1,6 @@
 package com.example.wguscheduler.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.wguscheduler.entities.AssessmentEntity;
@@ -28,6 +29,7 @@ import java.util.List;
 
 public class AssessmentsActivity extends AppCompatActivity {
 
+    private static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private AssessmentViewModel mAssessmentViewModel;
 
     @Override
@@ -54,8 +56,9 @@ public class AssessmentsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(AssessmentsActivity.this, AssessmentAddActivity.class);
+                intent.putExtra("courseId", getIntent().getIntExtra("courseId", 0));
+                startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
             }
         });
 
