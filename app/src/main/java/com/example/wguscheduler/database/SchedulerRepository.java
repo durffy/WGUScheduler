@@ -88,6 +88,16 @@ public class SchedulerRepository {
         });
     }
 
+    public void saveAssessment(AssessmentEntity assessment) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                mSchedulerDatabase.assessmentDAO().insert(assessment);
+            }
+
+        });
+    }
+
     public void addSampleData() {
 
         executor.execute(new Runnable(){

@@ -24,4 +24,8 @@ public class AssessmentViewModel extends AndroidViewModel {
     public LiveData<List<AssessmentEntity>> getAllAssessments() {
         return mAllAssessments;
     }
+
+    public void saveAssessment(AssessmentEntity assessment) {
+        mSchedulerRepository.saveAssessment(assessment);
+    }
 }

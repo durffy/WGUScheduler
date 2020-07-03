@@ -20,7 +20,7 @@ public interface AssessmentDAO {
     void insertAll(List<AssessmentEntity> assessments);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAssessment(AssessmentEntity assessment);
+    void insert(AssessmentEntity assessment);
 
     //read
     @Query("SELECT * FROM assessment_table")
