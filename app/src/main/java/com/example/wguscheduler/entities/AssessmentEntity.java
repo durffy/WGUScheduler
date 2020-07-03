@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import java.util.Date;
 
 @Entity (tableName = "assessment_table")
 public class AssessmentEntity {
@@ -20,19 +23,29 @@ public class AssessmentEntity {
     @ColumnInfo(name = "title")
     private String mTitle;
 
-    @ColumnInfo(name = "description")
-    private String mDescription;
+    @ColumnInfo(name = "notes")
+    private String mNotes;
 
-    @ColumnInfo(name = "type")
-    private String mType;
+    @ColumnInfo(name = "scheduled_date")
+    private Date mScheduledDate;
 
-    public AssessmentEntity(int mId, int mCourseId, String mTitle, String mDescription, String mType) {
+
+    public AssessmentEntity(int mId, int mCourseId, String mTitle, String mNotes, Date mScheduledDate) {
         this.mId = mId;
         this.mCourseId = mCourseId;
         this.mTitle = mTitle;
-        this.mDescription = mDescription;
-        this.mType = mType;
+        this.mNotes = mNotes;
+        this.mScheduledDate = mScheduledDate;
     }
+
+    @Ignore
+    public AssessmentEntity(int mCourseId, String mTitle, String mNotes, Date mScheduledDate) {
+        this.mCourseId = mCourseId;
+        this.mTitle = mTitle;
+        this.mNotes = mNotes;
+        this.mScheduledDate = mScheduledDate;
+    }
+
 
     public int getId() {
         return mId;
@@ -58,19 +71,11 @@ public class AssessmentEntity {
         this.mTitle = mTitle;
     }
 
-    public String getDescription() {
-        return mDescription;
+    public Date getScheduledDate() {
+        return mScheduledDate;
     }
 
-    public void setDescription(String mDescription) {
-        this.mDescription = mDescription;
-    }
-
-    public String getType() {
-        return mType;
-    }
-
-    public void setType(String mType) {
-        this.mType = mType;
+    public void setScheduledDate(Date mScheduledDate) {
+        this.mScheduledDate = mScheduledDate;
     }
 }
