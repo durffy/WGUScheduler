@@ -32,7 +32,12 @@ public class AssessmentAddActivity extends AppCompatActivity {
         mEditTitle = findViewById(R.id.edit_assessment_add_title);
         mEditNotes = findViewById(R.id.edit_assessment_add_notes);
 
+    }
 
-
+    // add support for going back a screen
+    @Override
+    public boolean onSupportNavigateUp(){
+        onBackPressed();
+        return true;
     }
 }
