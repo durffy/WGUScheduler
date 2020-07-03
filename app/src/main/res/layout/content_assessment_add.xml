@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+    <TextView
+        android:id="@+id/text_assessment_add_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_input_margin_vertical"
+        android:layout_marginEnd="@dimen/text_input_margin_horizontal"
+        android:text="Title"
+        app:layout_constraintEnd_toStartOf="@+id/edit_assessment_add_title"
+        app:layout_constraintTop_toTopOf="@+id/edit_assessment_add_title" />
+
     <EditText
         android:id="@+id/edit_assessment_add_title"
         android:layout_width="wrap_content"
@@ -18,57 +28,53 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/text_assessment_add_scheduled_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_input_margin_vertical"
+        android:layout_marginEnd="@dimen/text_input_margin_horizontal"
+        android:text="Scheduled Date"
+        app:layout_constraintEnd_toStartOf="@id/edit_assessment_add_scheduled_date"
+        app:layout_constraintTop_toTopOf="@id/edit_assessment_add_scheduled_date" />
+
     <EditText
-        android:id="@+id/edit_assessment_add_description"
+        android:id="@+id/edit_assessment_add_scheduled_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/edit_input_vertical"
+        android:layout_marginEnd="@dimen/edit_input_horizontal"
+        android:hint="MM/dd/yyyy"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_assessment_add_title" />
+
+
+    <TextView
+        android:id="@+id/test_assessment_add_notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_input_margin_vertical"
+        android:layout_marginEnd="@dimen/text_input_margin_horizontal"
+        android:text="Notes"
+        app:layout_constraintEnd_toStartOf="@+id/edit_assessment_add_notes"
+        app:layout_constraintTop_toTopOf="@+id/edit_assessment_add_notes" />
+
+    <EditText
+        android:id="@+id/edit_assessment_add_notes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/edit_input_vertical"
         android:layout_marginEnd="@dimen/edit_input_horizontal"
         android:ems="10"
         android:hint="Assessment Description"
-        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_assessment_add_title" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_assessment_add_scheduled_date"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        tools:layout_editor_absoluteX="109dp"
+        tools:layout_editor_absoluteY="222dp" />
 
-    <TextView
-        android:id="@+id/text_assessment_add_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/text_input_margin_vertical"
-        android:layout_marginEnd="@dimen/text_input_margin_horizontal"
-        android:text="Title"
-        app:layout_constraintEnd_toStartOf="@+id/edit_assessment_add_title"
-        app:layout_constraintTop_toTopOf="@+id/edit_assessment_add_title" />
-
-    <TextView
-        android:id="@+id/test_assessment_add_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/text_input_margin_vertical"
-        android:layout_marginEnd="@dimen/text_input_margin_horizontal"
-        android:text="Description"
-        app:layout_constraintEnd_toStartOf="@+id/edit_assessment_add_description"
-        app:layout_constraintTop_toTopOf="@+id/edit_assessment_add_description" />
-
-    <TextView
-        android:id="@+id/text_assessment_add_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/text_input_margin_vertical"
-        android:layout_marginEnd="@dimen/text_input_margin_horizontal"
-        android:text="Type"
-        app:layout_constraintEnd_toStartOf="@+id/spinner_assessment_add_type"
-        app:layout_constraintTop_toTopOf="@+id/spinner_assessment_add_type" />
-
-    <Spinner
-        android:id="@+id/spinner_assessment_add_type"
-        android:layout_width="210dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="@dimen/edit_input_vertical"
-        android:layout_marginEnd="@dimen/edit_input_horizontal"
-        android:autofillHints="Assessment Type"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/edit_assessment_add_description"
-        app:layout_constraintTop_toBottomOf="@+id/edit_assessment_add_description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
