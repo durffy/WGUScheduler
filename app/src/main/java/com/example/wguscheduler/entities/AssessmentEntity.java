@@ -78,4 +78,12 @@ public class AssessmentEntity {
     public void setScheduledDate(Date mScheduledDate) {
         this.mScheduledDate = mScheduledDate;
     }
+
+    public String getNotes() {
+        return mNotes;
+    }
+
+    public void setNotes(String mNotes) {
+        this.mNotes = mNotes;
+    }
 }
