@@ -17,6 +17,7 @@ import com.example.wguscheduler.activities.AssessmentDetailActivity;
 import com.example.wguscheduler.activities.AssessmentsActivity;
 import com.example.wguscheduler.entities.AssessmentEntity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,13 +39,14 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.Vi
                 final AssessmentEntity current = mAssessments.get(position);
                 //done: set to AssessmentDetailActivity when configured
                 Intent intent = new Intent(context, AssessmentDetailActivity.class);
+                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
                 //details of the course class to the intent
                 intent.putExtra("assessmentId", current.getId());
                 intent.putExtra("courseId", current.getCourseId());
                 intent.putExtra("title", current.getTitle());
-                intent.putExtra("type", current.getType());
-                intent.putExtra("description",current.getDescription());
+                intent.putExtra("notes",current.getNotes());
+                intent.putExtra("scheduledDate", formatter.format(current.getScheduledDate()));
 
                 context.startActivity(intent);
 

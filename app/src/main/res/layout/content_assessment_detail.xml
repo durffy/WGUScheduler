@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Description: "
+        android:text="Notes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_assessment_type" />
 
@@ -33,27 +33,32 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Type: "
+        android:text="Scheduled Date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_assessment_title" />
 
     <TextView
-        android:id="@+id/text_assessment_type_output"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:text="text_assessment_type_output"
-        app:layout_constraintStart_toEndOf="@+id/text_assessment_type"
-        app:layout_constraintTop_toBottomOf="@+id/text_assessment_title" />
-
-    <TextView
-        android:id="@+id/text_assessment_description_output"
+        android:id="@+id/text_assessment_scheduled_date_output"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="text_assessment_description_output"
+        android:layout_marginEnd="8dp"
+        android:text="text_assessment_scheduled_date_output"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_assessment_type"
+        app:layout_constraintTop_toTopOf="@+id/text_assessment_type" />
+
+    <TextView
+        android:id="@+id/text_assessment_notes_output"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="fill_vertical"
+        android:inputType="textMultiLine|text"
+        android:text="text_assessment_notes_output"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/text_assessment_description"
-        app:layout_constraintTop_toBottomOf="@+id/text_assessment_type" />
+        app:layout_constraintTop_toTopOf="@+id/text_assessment_description" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
