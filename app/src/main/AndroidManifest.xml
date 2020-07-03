@@ -12,15 +12,15 @@
         <activity
             android:name=".activities.AssessmentAddActivity"
             android:label="@string/title_activity_add_assessment"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.AssessmentsActivity"
             android:label="@string/title_activity_assessment"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.AssessmentDetailActivity"
             android:label="@string/title_activity_assessment_details"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.CourseDetailsActivity"
             android:label="@string/title_activity_course_details"
