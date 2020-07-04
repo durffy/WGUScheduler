@@ -31,7 +31,7 @@ public class CourseAddActivity extends AppCompatActivity {
     private static final String TAG = "CourseAddActivity";
     private CourseViewModel mCourseViewModel;
     private MentorViewModel mMentorViewModel;
-    private EditText mCourseTitle, mCourseStartDate, mCourseEndDate,
+    private EditText mCourseTitle, mCourseStartDate, mCourseEndDate,mCourseNotes,
         mMentorFirstName, mMentorLastName, mMentorEmail, mMentorPhone;
     private MentorEntity mMentor;
     @Override
@@ -53,6 +53,7 @@ public class CourseAddActivity extends AppCompatActivity {
         mCourseTitle = findViewById(R.id.edit_course_add_title);
         mCourseStartDate = findViewById(R.id.edit_course_add_start);
         mCourseEndDate = findViewById(R.id.edit_course_add_end);
+        mCourseNotes = findViewById(R.id.edit_course_add_notes);
         mMentorFirstName = findViewById(R.id.edit_mentor_first);
         mMentorLastName = findViewById(R.id.edit_mentor_last);
         mMentorEmail = findViewById(R.id.edit_mentor_email);
@@ -76,14 +77,14 @@ public class CourseAddActivity extends AppCompatActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         verifyMentor();
         int termId = getIntent().getIntExtra("termId", 0);
-        //int mentorId = mentor.getMentorId();
         int mentorId = mMentor.getId();
         String title = mCourseTitle.getText().toString();
         String status = "Plan to Take";
         Date start = formatter.parse(mCourseStartDate.getText().toString());
         Date end = formatter.parse(mCourseEndDate.getText().toString());
+        String notes = mCourseNotes.getText().toString();
 
-        CourseEntity course = new CourseEntity(termId, mentorId, title, status, start, end);
+        CourseEntity course = new CourseEntity(termId, mentorId, title, status, start, end, notes);
         mCourseViewModel.saveCourse(course);
         onSupportNavigateUp();
     }

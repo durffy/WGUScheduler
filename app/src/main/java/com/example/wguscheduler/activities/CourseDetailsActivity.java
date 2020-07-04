@@ -5,8 +5,6 @@ import android.os.Bundle;
 
 import com.example.wguscheduler.entities.MentorEntity;
 import com.example.wguscheduler.viewmodel.MentorViewModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +23,7 @@ import java.util.List;
 public class CourseDetailsActivity extends AppCompatActivity {
 
             //course textViews
-    private TextView textViewCourseTitle, textViewStartDate, textViewEndDate, textViewStatus,
+    private TextView textViewCourseTitle, textViewStartDate, textViewEndDate, textViewStatus, textViewNotes,
             //mentor textViews
             textViewMentor, textViewMentorPhone, textViewMentorEmail;
 
@@ -66,16 +64,18 @@ public class CourseDetailsActivity extends AppCompatActivity {
     }
 
     public void loadCourseDetails(){
-        textViewCourseTitle = findViewById(R.id.text_course_title);
+        textViewCourseTitle = findViewById(R.id.text_course_add_title);
         textViewStartDate = findViewById(R.id.text_course_start_date_output);
         textViewEndDate = findViewById(R.id.text_course_end_date_output);
         textViewStatus = findViewById(R.id.text_course_status_output);
+        textViewNotes = findViewById(R.id.text_course_notes_output);
 
         if(getIntent().getStringExtra("title") != null){
             textViewCourseTitle.setText(getIntent().getStringExtra("title"));
             textViewStartDate.setText(getIntent().getStringExtra("startDate"));
             textViewEndDate.setText(getIntent().getStringExtra("endDate"));
             textViewStatus.setText(getIntent().getStringExtra("status"));
+            textViewNotes.setText(getIntent().getStringExtra("notes"));
         }
     }
     private void loadMentorDetails() {
@@ -83,6 +83,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
         textViewMentor = findViewById(R.id.text_mentor_name_output);
         textViewMentorPhone =findViewById(R.id.text_mentor_phone_output);
         textViewMentorEmail =findViewById(R.id.text_mentor_email_output);
+        textViewNotes = findViewById(R.id.text_course_notes_output);
 
         if(mMentorViewModel.getAllMentors() != null) {
 

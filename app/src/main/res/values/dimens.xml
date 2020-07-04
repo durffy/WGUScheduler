@@ -1,7 +1,10 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="text_input_margin_horizontal">24dp</dimen>
-    <dimen name="text_input_margin_vertical">16dp</dimen>
-    <dimen name="edit_input_horizontal">64dp</dimen>
+    <dimen name="text_input_margin_large">24dp</dimen>
+    <dimen name="text_input_margin">16dp</dimen>
+    <dimen name="edit_input_large">64dp</dimen>
     <dimen name="edit_input_vertical">8dp</dimen>
+    <dimen name="text_margin">8dp</dimen>
+    <dimen name="text_margin_large">16dp</dimen>
+    <dimen name="edit_margin_large">64dp</dimen>
 </resources>

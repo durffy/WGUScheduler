@@ -6,54 +6,117 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+    <TextView
+        android:id="@+id/text_course"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Course"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_course_add_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_input_margin"
+        android:layout_marginEnd="@dimen/text_input_margin_large"
+        android:text="Title"
+        app:layout_constraintEnd_toStartOf="@+id/edit_course_add_title"
+        app:layout_constraintTop_toTopOf="@+id/edit_course_add_title" />
+
     <EditText
-        android:id="@+id/edit_mentor_phone"
+        android:id="@+id/edit_course_add_title"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/edit_margin_large"
+        android:ems="10"
+        android:hint="Course Title"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_course" />
+
+    <TextView
+        android:id="@+id/text_term_add_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_input_margin"
+        android:layout_marginEnd="@dimen/text_input_margin_large"
+        android:text="Start Date"
+        app:layout_constraintEnd_toStartOf="@+id/edit_course_add_start"
+        app:layout_constraintTop_toBottomOf="@+id/edit_course_add_title" />
+
+    <EditText
+        android:id="@+id/edit_course_add_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="64dp"
         android:ems="10"
-        android:hint="Mentor Phone"
-        android:inputType="textPersonName"
+        android:hint="MM/dd/yyyy"
+        android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_mentor_email" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_course_add_title" />
+
+    <TextView
+        android:id="@+id/text_term_add_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_input_margin"
+        android:layout_marginEnd="@dimen/text_input_margin_large"
+        android:text="End Date"
+        app:layout_constraintEnd_toStartOf="@+id/edit_course_add_end"
+        app:layout_constraintTop_toBottomOf="@+id/edit_course_add_start" />
 
     <EditText
-        android:id="@+id/edit_mentor_email"
+        android:id="@+id/edit_course_add_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="64dp"
         android:ems="10"
-        android:hint="Mentor Email"
-        android:inputType="textPersonName"
+        android:hint="MM/dd/yyyy"
+        android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_mentor_last" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_course_add_start" />
 
     <TextView
-        android:id="@+id/text_mentor_email2"
+        android:id="@+id/text_course_add_notes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:text="Email"
-        app:layout_constraintEnd_toStartOf="@+id/edit_mentor_email"
-        app:layout_constraintTop_toTopOf="@+id/edit_mentor_email" />
+        android:layout_marginTop="@dimen/text_input_margin"
+        android:layout_marginEnd="@dimen/text_input_margin_large"
+        android:text="Notes"
+        app:layout_constraintEnd_toStartOf="@+id/edit_course_add_notes"
+        app:layout_constraintTop_toTopOf="@+id/edit_course_add_notes" />
+
+    <EditText
+        android:id="@+id/edit_course_add_notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/edit_margin_large"
+        android:ems="10"
+        android:hint="Course Notes"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_course_add_end" />
 
     <TextView
-        android:id="@+id/text_mentor_phone2"
+        android:id="@+id/text_mentor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:text="Phone"
-        app:layout_constraintEnd_toStartOf="@+id/edit_mentor_phone"
-        app:layout_constraintTop_toBottomOf="@+id/edit_mentor_email" />
+        android:layout_marginStart="8dp"
+        android:text="Mentor"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_course_add_notes" />
 
     <TextView
         android:id="@+id/text_mentor_first"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="@dimen/text_input_margin"
+        android:layout_marginEnd="@dimen/text_input_margin_large"
         android:text="First Name"
         app:layout_constraintEnd_toStartOf="@+id/edit_mentor_first"
         app:layout_constraintTop_toTopOf="@+id/edit_mentor_first" />
@@ -71,97 +134,11 @@
         app:layout_constraintTop_toBottomOf="@+id/text_mentor" />
 
     <TextView
-        android:id="@+id/text_mentor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Mentor"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_course_add_end" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:text="Title"
-        app:layout_constraintEnd_toStartOf="@+id/edit_course_add_title"
-        app:layout_constraintTop_toTopOf="@+id/edit_course_add_title" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:text="Start Date"
-        app:layout_constraintEnd_toStartOf="@+id/edit_course_add_start"
-        app:layout_constraintTop_toBottomOf="@+id/edit_course_add_title" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:text="End Date"
-        app:layout_constraintEnd_toStartOf="@+id/edit_course_add_end"
-        app:layout_constraintTop_toBottomOf="@+id/edit_course_add_start" />
-
-    <EditText
-        android:id="@+id/edit_course_add_title"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="64dp"
-        android:ems="10"
-        android:hint="Course Title"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_course" />
-
-    <EditText
-        android:id="@+id/edit_course_add_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
-        android:ems="10"
-        android:hint="MM/dd/yyyy"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_course_add_title" />
-
-    <EditText
-        android:id="@+id/edit_course_add_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
-        android:ems="10"
-        android:hint="MM/dd/yyyy"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_course_add_start" />
-
-    <TextView
-        android:id="@+id/text_course"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Course"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/text_mentor_last"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="@dimen/text_input_margin"
+        android:layout_marginEnd="@dimen/text_input_margin_large"
         android:text="Last Name"
         app:layout_constraintEnd_toStartOf="@+id/edit_mentor_last"
         app:layout_constraintTop_toBottomOf="@+id/edit_mentor_first" />
@@ -176,5 +153,47 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_mentor_first" />
+
+    <TextView
+        android:id="@+id/text_mentor_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_input_margin"
+        android:layout_marginEnd="@dimen/text_input_margin_large"
+        android:text="Email"
+        app:layout_constraintEnd_toStartOf="@+id/edit_mentor_email"
+        app:layout_constraintTop_toTopOf="@+id/edit_mentor_email" />
+
+    <EditText
+        android:id="@+id/edit_mentor_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        android:ems="10"
+        android:hint="Mentor Email"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_mentor_last" />
+
+    <TextView
+        android:id="@+id/text_mentor_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_input_margin"
+        android:layout_marginEnd="@dimen/text_input_margin_large"
+        android:text="Phone"
+        app:layout_constraintEnd_toStartOf="@+id/edit_mentor_phone"
+        app:layout_constraintTop_toBottomOf="@+id/edit_mentor_email" />
+
+    <EditText
+        android:id="@+id/edit_mentor_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        android:ems="10"
+        android:hint="Mentor Phone"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_mentor_email" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

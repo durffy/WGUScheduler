@@ -50,6 +50,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
                 intent.putExtra("title",current.getTitle());
                 intent.putExtra("startDate",formatter.format(current.getStartDate()));
                 intent.putExtra("endDate",formatter.format(current.getEndDate()));
+                intent.putExtra("notes", current.getNotes());
 
                 context.startActivity(intent);
 
