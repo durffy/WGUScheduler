@@ -132,4 +132,12 @@ public class CourseEntity {
     public void setStatus(String mStatus) {
         this.mStatus = mStatus;
     }
+
+    public String getNotes() {
+        return mNotes;
+    }
+
+    public void setNotes(String mNotes) {
+        this.mNotes = mNotes;
+    }
 }
