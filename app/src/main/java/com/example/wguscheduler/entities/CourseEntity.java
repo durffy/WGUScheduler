@@ -60,6 +60,7 @@ public class CourseEntity {
         this.mStatus = mStatus;
         this.mStartDate = mStartDate;
         this.mEndDate = mEndDate;
+        this.mNotes = mNotes;
     }
 
     public String getCourse() {
