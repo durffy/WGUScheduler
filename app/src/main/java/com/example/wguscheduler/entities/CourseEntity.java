@@ -30,13 +30,17 @@ public class CourseEntity {
     @ColumnInfo(name = "status")
     private String mStatus;
 
+    @ColumnInfo(name = "notes")
+    private String mNotes;
+
     @ColumnInfo(name = "start_date")
     private Date mStartDate;
 
     @ColumnInfo(name = "end_date")
     private Date mEndDate;
 
-    public CourseEntity(int mId, int mTermId, int mMentorId, String mTitle, String mStatus, Date mStartDate, Date mEndDate) {
+    public CourseEntity(int mId, int mTermId, int mMentorId, String mTitle, String mStatus,
+                        Date mStartDate, Date mEndDate, String mNotes) {
         this.mId = mId;
         this.mTermId = mTermId;
         this.mMentorId = mMentorId;
@@ -44,10 +48,12 @@ public class CourseEntity {
         this.mStatus = mStatus;
         this.mStartDate = mStartDate;
         this.mEndDate = mEndDate;
+        this.mNotes = mNotes;
     }
 
     @Ignore
-    public CourseEntity(int mTermId, int mMentorId, String mTitle, String mStatus, Date mStartDate, Date mEndDate) {
+    public CourseEntity(int mTermId, int mMentorId, String mTitle, String mStatus, Date mStartDate,
+                        Date mEndDate, String mNotes) {
         this.mTermId = mTermId;
         this.mMentorId = mMentorId;
         this.mTitle = mTitle;
@@ -59,14 +65,15 @@ public class CourseEntity {
     public String getCourse() {
 
         String course = String.format("\n" +
-                        "\nCourse ID: %s\n\r" +
+                        "Course ID: %s\n\r" +
                         "TermId: %s\n\r" +
                         "Mentor Id: %s\n\r" +
                         "Title: %s\n\r" +
                         "Status: %s\n\r" +
                         "Start Date: %s\n\r" +
-                        "End Date: %s\n\r",
-                mId, mTermId, mMentorId, mTitle, mStatus, mStartDate, mEndDate);
+                        "End Date: %s\n\r" +
+                        "Notes: %s\n\r",
+                mId, mTermId, mMentorId, mTitle, mStatus, mStartDate, mEndDate, mNotes);
         return course;
     }
 
