@@ -1,10 +1,12 @@
 package com.example.wguscheduler.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
@@ -108,28 +110,53 @@ public class TermDetailsActivity extends AppCompatActivity {
 
     private void deleteTerm(int termId) {
 
+        //build the alert message
+        AlertDialog.Builder builder = new AlertDialog.Builder(TermDetailsActivity.this);
+        builder.setTitle("Term Delete");
+        builder.setMessage("Deleting this term will delete all associated course data. Do you want to proceed with the delete?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mTermViewModel.deleteTerm(termId);
+                finish();
+            }
+
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+
+        });
+
+        //process the delete verification
         mCourseViewModel.getAllCourses().observe(this, new Observer<List<CourseEntity>>() {
 
-                    @Override
-                    public void onChanged(@Nullable final List<CourseEntity> courses) {
-                        // Update the cached copy of the words in the adapter.
-                        //filter the list of courses to items that match the TermId
-                        List<CourseEntity> filteredCourses = new ArrayList<>();
+                @Override
+                public void onChanged(@Nullable final List<CourseEntity> courses) {
+                    // Update the cached copy of the words in the adapter.
+                    //filter the list of courses to items that match the TermId
+                    List<CourseEntity> filteredCourses = new ArrayList<>();
 
-                        for (CourseEntity c : courses) {
-                            Log.d(TAG, "onChanged(): c:course "+c.getCourse());
-                            Log.d(TAG, "onChanged(): getIntent termId: " + getIntent().getIntExtra("termId", 0));
-                            if(c.getTermId()== getIntent().getIntExtra("termId", 0)){
-                                filteredCourses.add(c);
-                            }
-                        }
-
-                        if(filteredCourses.isEmpty()){
-                            mTermViewModel.deleteTerm(termId);
-                            onSupportNavigateUp();
+                    for (CourseEntity c : courses) {
+                        Log.d(TAG, "onChanged(): c:course "+c.getCourse());
+                        Log.d(TAG, "onChanged(): getIntent termId: " + getIntent().getIntExtra("termId", 0));
+                        if(c.getTermId()== getIntent().getIntExtra("termId", 0)){
+                            filteredCourses.add(c);
                         }
                     }
-                });
+
+                    if(filteredCourses.isEmpty()){
+                        builder.setMessage("Do you want to proceed with the delete?");
+                    }
+                }
+         });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
 
     }
 }
