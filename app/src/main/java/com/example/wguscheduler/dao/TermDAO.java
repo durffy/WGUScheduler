@@ -30,11 +30,10 @@ public interface TermDAO {
     void updateTerm(TermEntity term);
 
     //DELETE
-    @Delete
-    void deleteTerm(TermEntity term);
+    @Query("DELETE FROM term_table WHERE id IS :termId")
+    void deleteTerm(int termId);
 
     @Query("DELETE FROM term_table")
     void deleteAll();
-
 
 }
