@@ -21,9 +21,13 @@ public class TermViewModel extends AndroidViewModel {
         mAllTerms = mSchedulerRepository.getAllTerms();
     }
 
+    //C.R.U.D.
     //create
     public void saveTerm(TermEntity term){
         mSchedulerRepository.saveTerm(term);
+    }
+    public void addSampleData() {
+        mSchedulerRepository.addSampleData();
     }
 
     //read
@@ -31,7 +35,8 @@ public class TermViewModel extends AndroidViewModel {
         return mAllTerms;
     }
 
-    public void addSampleData() {
-        mSchedulerRepository.addSampleData();
+    //delete
+    public void deleteTerm(int termId) {
+        mSchedulerRepository.deleteTerm(termId);
     }
 }

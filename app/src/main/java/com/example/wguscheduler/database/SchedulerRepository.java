@@ -131,6 +131,17 @@ public class SchedulerRepository {
         return mAllMentors;
     }
 
+    //delete
+    public void deleteTerm(int termId) {
 
+        executor.execute(new Runnable() {
+
+            @Override
+            public void run() {
+                mSchedulerDatabase.termDAO().deleteTerm(termId);
+            }
+        });
+
+    }
 
 }
