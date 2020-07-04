@@ -75,6 +75,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
             textViewStartDate.setText(getIntent().getStringExtra("startDate"));
             textViewEndDate.setText(getIntent().getStringExtra("endDate"));
             textViewStatus.setText(getIntent().getStringExtra("status"));
+            textViewNotes.setText(getIntent().getStringExtra("notes"));
         }
     }
     private void loadMentorDetails() {
@@ -82,6 +83,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
         textViewMentor = findViewById(R.id.text_mentor_name_output);
         textViewMentorPhone =findViewById(R.id.text_mentor_phone_output);
         textViewMentorEmail =findViewById(R.id.text_mentor_email_output);
+        textViewNotes = findViewById(R.id.text_course_notes_output);
 
         if(mMentorViewModel.getAllMentors() != null) {
 
