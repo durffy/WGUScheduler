@@ -9,6 +9,8 @@ import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
+import static androidx.room.ForeignKey.CASCADE;
+
 @Entity (tableName = "assessment_table")
 public class AssessmentEntity {
 
@@ -17,7 +19,7 @@ public class AssessmentEntity {
     @ColumnInfo(name = "id")
     private int mId;
 
-    @ForeignKey(entity = CourseEntity.class, parentColumns = "id", childColumns = "id")
+    @ForeignKey(onDelete = CASCADE, entity = CourseEntity.class, parentColumns = "id", childColumns = "id")
     private int mCourseId;
 
     @ColumnInfo(name = "title")

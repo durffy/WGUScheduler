@@ -19,7 +19,11 @@ import com.example.wguscheduler.entities.MentorEntity;
 import com.example.wguscheduler.entities.TermEntity;
 import com.example.wguscheduler.utilities.Converters;
 
-@Database(entities = {TermEntity.class, AssessmentEntity.class, CourseEntity.class, MentorEntity.class}, version = 5)
+@Database(entities = {TermEntity.class,
+        AssessmentEntity.class,
+        CourseEntity.class,
+        MentorEntity.class},
+        version = 6)
 @TypeConverters({Converters.class})
 public abstract class SchedulerDatabase extends RoomDatabase {
     public abstract CourseDAO courseDAO();
