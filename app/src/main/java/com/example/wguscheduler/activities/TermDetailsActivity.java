@@ -93,7 +93,7 @@ public class TermDetailsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_term_detail, menu);
+        inflater.inflate(R.menu.menu_detail, menu);
         return true;
     }
 
@@ -115,21 +115,17 @@ public class TermDetailsActivity extends AppCompatActivity {
         builder.setTitle("Term Delete");
         builder.setMessage("Deleting this term will delete all associated course data. Do you want to proceed with the delete?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mTermViewModel.deleteTerm(termId);
                 finish();
             }
-
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
-
         });
 
         //process the delete verification
@@ -155,6 +151,7 @@ public class TermDetailsActivity extends AppCompatActivity {
                 }
          });
 
+        // create and show the alert dialog
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
 
