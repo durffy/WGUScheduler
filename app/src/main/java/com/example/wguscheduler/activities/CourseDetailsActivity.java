@@ -1,17 +1,24 @@
 package com.example.wguscheduler.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.wguscheduler.entities.MentorEntity;
+import com.example.wguscheduler.viewmodel.CourseViewModel;
 import com.example.wguscheduler.viewmodel.MentorViewModel;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,13 +29,14 @@ import java.util.List;
 
 public class CourseDetailsActivity extends AppCompatActivity {
 
+    private static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
             //course textViews
     private TextView textViewCourseTitle, textViewStartDate, textViewEndDate, textViewStatus, textViewNotes,
             //mentor textViews
             textViewMentor, textViewMentorPhone, textViewMentorEmail;
-
     private MentorViewModel mMentorViewModel;
-    private static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+    private CourseViewModel mCourseViewModel;
+
 
 
     @Override
@@ -41,6 +49,8 @@ public class CourseDetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        mCourseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);;
 
         loadCourseDetails();
         loadMentorDetails();
@@ -62,6 +72,46 @@ public class CourseDetailsActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_detail, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if( id == R.id.item_term_delete){
+            deleteCourse(getIntent().getIntExtra("courseId",0));
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void deleteCourse(int courseId) {
+        //build the alert message
+        AlertDialog.Builder builder = new AlertDialog.Builder(CourseDetailsActivity.this);
+        builder.setTitle("Term Delete");
+        builder.setMessage("Deleting this term will delete all associated course data. Do you want to proceed with the delete?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mCourseViewModel.deleteCourse(courseId);
+                finish();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+    }
 
     public void loadCourseDetails(){
         textViewCourseTitle = findViewById(R.id.text_course_add_title);
@@ -78,6 +128,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
             textViewNotes.setText(getIntent().getStringExtra("notes"));
         }
     }
+
     private void loadMentorDetails() {
         mMentorViewModel = new ViewModelProvider(this).get(MentorViewModel.class);
         textViewMentor = findViewById(R.id.text_mentor_name_output);
