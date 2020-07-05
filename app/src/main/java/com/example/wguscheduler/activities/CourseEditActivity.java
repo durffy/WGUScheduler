@@ -80,9 +80,9 @@ public class CourseEditActivity extends AppCompatActivity {
     private void loadMentorDetails() {
         mMentorViewModel = new ViewModelProvider(this).get(MentorViewModel.class);
         mEditMentorFirstName = findViewById(R.id.edit_mentor_edit_first);
-        mEditMentorLastName = findViewById(R.id.edit_mentor_edit_first);
-        mEditMentorEmail = findViewById(R.id.edit_mentor_edit_first);
-        mEditMentorPhone  = findViewById(R.id.edit_mentor_edit_first);
+        mEditMentorLastName = findViewById(R.id.edit_mentor_edit_last);
+        mEditMentorEmail = findViewById(R.id.edit_mentor_edit_email);
+        mEditMentorPhone  = findViewById(R.id.edit_mentor_edit_phone);
 
         if(mMentorViewModel.getAllMentors() != null) {
             mMentorViewModel.getAllMentors().observe(this, new Observer<List<MentorEntity>>() {
