@@ -144,4 +144,13 @@ public class SchedulerRepository {
 
     }
 
+    public void deleteCourse(int courseId) {
+        executor.execute(new Runnable() {
+
+            @Override
+            public void run() {
+                mSchedulerDatabase.courseDAO().deleteCourse(courseId);
+            }
+        });
+    }
 }

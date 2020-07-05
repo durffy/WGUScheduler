@@ -35,4 +35,8 @@ public class CourseViewModel extends AndroidViewModel {
     public void addSampleData() {
         mSchedulerRepository.addSampleData();
     }
+
+    public void deleteCourse(int courseId) {
+        mSchedulerRepository.deleteCourse(courseId);
+    }
 }
