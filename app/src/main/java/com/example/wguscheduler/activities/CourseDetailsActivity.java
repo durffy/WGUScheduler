@@ -16,6 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,7 +31,8 @@ import java.util.List;
 public class CourseDetailsActivity extends AppCompatActivity {
 
     private static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
-            //course textViews
+    private static final String TAG = "CourseDetailsActivity";
+    //course textViews
     private TextView textViewCourseTitle, textViewStartDate, textViewEndDate, textViewStatus, textViewNotes,
             //mentor textViews
             textViewMentor, textViewMentorPhone, textViewMentorEmail;
@@ -105,7 +107,9 @@ public class CourseDetailsActivity extends AppCompatActivity {
             textViewStartDate.setText(getIntent().getStringExtra("startDate"));
             textViewEndDate.setText(getIntent().getStringExtra("endDate"));
             textViewStatus.setText(getIntent().getStringExtra("status"));
+            Log.i(TAG, "loadCourseDetails: "+getIntent().getStringExtra("notes"));
             textViewNotes.setText(getIntent().getStringExtra("notes"));
+
         }
     }
 
