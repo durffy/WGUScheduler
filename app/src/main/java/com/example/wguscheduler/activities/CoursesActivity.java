@@ -61,6 +61,7 @@ public class CoursesActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CoursesActivity.this, CourseAddActivity.class);
                 intent.putExtra("termId", getIntent().getIntExtra("termId", 0));
+                intent.putExtra("courseId", getIntent().getIntExtra("courseId", 0));
                 startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
             }
         });
@@ -97,6 +98,7 @@ public class CoursesActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
