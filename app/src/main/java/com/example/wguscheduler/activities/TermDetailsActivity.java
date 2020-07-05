@@ -100,7 +100,7 @@ public class TermDetailsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if( id == R.id.item_term_delete){
+        if( id == R.id.item_delete){
             deleteTerm(getIntent().getIntExtra("termId",0));
             return true;
         }

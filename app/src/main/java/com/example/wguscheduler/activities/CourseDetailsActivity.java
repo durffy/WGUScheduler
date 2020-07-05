@@ -82,36 +82,16 @@ public class CourseDetailsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if( id == R.id.item_term_delete){
+        if( id == R.id.item_delete){
             deleteCourse(getIntent().getIntExtra("courseId",0));
             return true;
+        }else if( id == R.id.item_edit){
+            editCourse();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void deleteCourse(int courseId) {
-        //build the alert message
-        AlertDialog.Builder builder = new AlertDialog.Builder(CourseDetailsActivity.this);
-        builder.setTitle("Term Delete");
-        builder.setMessage("Deleting this term will delete all associated course data. Do you want to proceed with the delete?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mCourseViewModel.deleteCourse(courseId);
-                finish();
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-
-    }
 
     public void loadCourseDetails(){
         textViewCourseTitle = findViewById(R.id.text_course_add_title);
@@ -147,6 +127,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
                     for (MentorEntity m : mentors) {
 
                         if(m.getId()== getIntent().getIntExtra("mentorId", 0)){
+                            //todo: split into first and last name
                             String name = m.getFirstName() + " " + m.getLastName();
                             textViewMentor.setText(name);
                             textViewMentorPhone.setText(m.getPhone());
@@ -161,5 +142,36 @@ public class CourseDetailsActivity extends AppCompatActivity {
         }
 
     }
+
+    private void editCourse() {
+        Intent intent = new Intent(CourseDetailsActivity.this, CourseEditActivity.class);
+        intent.putExtra("courseId", getIntent().getIntExtra("courseId",0));
+        intent.putExtra("mentorId", getIntent().getIntExtra("mentorId",0));
+        startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+    }
+
+    private void deleteCourse(int courseId) {
+        //build the alert message
+        AlertDialog.Builder builder = new AlertDialog.Builder(CourseDetailsActivity.this);
+        builder.setTitle("Term Delete");
+        builder.setMessage("Deleting this term will delete all associated course data. Do you want to proceed with the delete?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mCourseViewModel.deleteCourse(courseId);
+                finish();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+    }
+
 
 }
