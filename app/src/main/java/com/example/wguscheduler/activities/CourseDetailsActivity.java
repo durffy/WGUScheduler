@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.wguscheduler.entities.CourseEntity;
 import com.example.wguscheduler.entities.MentorEntity;
 import com.example.wguscheduler.viewmodel.CourseViewModel;
 import com.example.wguscheduler.viewmodel.MentorViewModel;
@@ -26,6 +27,7 @@ import android.widget.TextView;
 
 import com.example.wguscheduler.R;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class CourseDetailsActivity extends AppCompatActivity {
@@ -102,15 +104,27 @@ public class CourseDetailsActivity extends AppCompatActivity {
         textViewStatus = findViewById(R.id.text_course_status_output);
         textViewNotes = findViewById(R.id.text_course_notes_output);
 
-        if(getIntent().getStringExtra("title") != null){
-            textViewCourseTitle.setText(getIntent().getStringExtra("title"));
-            textViewStartDate.setText(getIntent().getStringExtra("startDate"));
-            textViewEndDate.setText(getIntent().getStringExtra("endDate"));
-            textViewStatus.setText(getIntent().getStringExtra("status"));
-            Log.i(TAG, "loadCourseDetails: "+getIntent().getStringExtra("notes"));
-            textViewNotes.setText(getIntent().getStringExtra("notes"));
+        if(mCourseViewModel.getAllCourses() != null) {
 
+            mCourseViewModel.getAllCourses().observe(this, new Observer<List<CourseEntity>>() {
+
+                @Override
+                public void onChanged(@Nullable final List<CourseEntity> courses) {
+                    // Update the cached copy of the words in the adapter.
+                    SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                    for (CourseEntity c : courses) {
+                        if(c.getId()== getIntent().getIntExtra("mentorId", 0)){
+                            textViewCourseTitle.setText(c.getTitle());
+                            textViewStartDate.setText(formatter.format(c.getStartDate()));
+                            textViewEndDate.setText(formatter.format(c.getEndDate()));
+                            textViewStatus.setText(c.getStatus());
+                            textViewNotes.setText(c.getNotes());
+                        }
+                    }
+                }
+            });
         }
+
     }
 
     private void loadMentorDetails() {
