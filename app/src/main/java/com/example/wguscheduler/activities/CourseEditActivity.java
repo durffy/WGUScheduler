@@ -1,6 +1,8 @@
 package com.example.wguscheduler.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
@@ -14,14 +16,20 @@ import com.example.wguscheduler.entities.CourseEntity;
 import com.example.wguscheduler.entities.MentorEntity;
 import com.example.wguscheduler.viewmodel.CourseViewModel;
 import com.example.wguscheduler.viewmodel.MentorViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class CourseEditActivity extends AppCompatActivity {
 
     private CourseViewModel mCourseViewModel;
     private MentorViewModel mMentorViewModel;
+
+    private MentorEntity mMentor;
+    private CourseEntity mCourse;
 
     private EditText mEditCourseName, mEditCourseStatus, mEditCourseStart, mEditCourseEnd, mEditCourseNotes;
     private EditText mEditMentorFirstName, mEditMentorLastName, mEditMentorEmail, mEditMentorPhone;
@@ -39,6 +47,21 @@ public class CourseEditActivity extends AppCompatActivity {
 
         loadCourseDetails();
         loadMentorDetails();
+
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                try {
+                    updateMentor();
+                    updateCourse();
+                    onSupportNavigateUp();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 
@@ -65,6 +88,7 @@ public class CourseEditActivity extends AppCompatActivity {
                 public void onChanged(@Nullable final List<CourseEntity> courses) {
                     for (CourseEntity c: courses) {
                         if(c.getId()== getIntent().getIntExtra("courseId", 0)){
+                            mCourse = c;
                             mEditCourseName.setText(c.getTitle());
                             mEditCourseStatus.setText(c.getStatus());
                             mEditCourseStart.setText(formatter.format(c.getStartDate()));
@@ -91,6 +115,7 @@ public class CourseEditActivity extends AppCompatActivity {
                     for (MentorEntity m : mentors) {
 
                         if(m.getId()== getIntent().getIntExtra("mentorId", 0)){
+                            mMentor = m;
                             mEditMentorFirstName.setText(m.getFirstName());
                             mEditMentorLastName.setText(m.getLastName());
                             mEditMentorPhone.setText(m.getPhone());
@@ -102,6 +127,37 @@ public class CourseEditActivity extends AppCompatActivity {
         }
     }
 
+    private void updateMentor() {
 
+        String first = mEditMentorFirstName.getText().toString();
+        String last = mEditMentorLastName.getText().toString();
+        String email = mEditMentorEmail.getText().toString();
+        String phone = mEditMentorPhone.getText().toString();
+
+        mMentor.setFirstName(first);
+        mMentor.setLastName(last);
+        mMentor.setEmail(email);
+        mMentor.setPhone(phone);
+
+        mMentorViewModel.saveMentor(mMentor);
+
+    }
+
+    private void updateCourse() throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        String name = mEditCourseName.getText().toString();
+        String status = mEditCourseStatus.getText().toString();
+        Date start = formatter.parse(mEditCourseStart.getText().toString());
+        Date end = formatter.parse(mEditCourseEnd.getText().toString());
+        String notes = mEditCourseNotes.getText().toString();
+
+        mCourse.setTitle(name);
+        mCourse.setStatus(status);
+        mCourse.setStartDate(start);
+        mCourse.setEndDate(end);
+        mCourse.setNotes(notes);
+
+        mCourseViewModel.saveCourse(mCourse);
+    }
 
 }
