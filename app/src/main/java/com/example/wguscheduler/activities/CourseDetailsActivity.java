@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.wguscheduler.entities.CourseEntity;
 import com.example.wguscheduler.entities.MentorEntity;
 import com.example.wguscheduler.viewmodel.CourseViewModel;
 import com.example.wguscheduler.viewmodel.MentorViewModel;
@@ -16,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,12 +27,14 @@ import android.widget.TextView;
 
 import com.example.wguscheduler.R;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class CourseDetailsActivity extends AppCompatActivity {
 
     private static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
-            //course textViews
+    private static final String TAG = "CourseDetailsActivity";
+    //course textViews
     private TextView textViewCourseTitle, textViewStartDate, textViewEndDate, textViewStatus, textViewNotes,
             //mentor textViews
             textViewMentor, textViewMentorPhone, textViewMentorEmail;
@@ -82,12 +86,84 @@ public class CourseDetailsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if( id == R.id.item_term_delete){
+        if( id == R.id.item_delete){
             deleteCourse(getIntent().getIntExtra("courseId",0));
             return true;
+        }else if( id == R.id.item_edit){
+            editCourse();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void loadCourseDetails(){
+        textViewCourseTitle = findViewById(R.id.text_course_add_title);
+        textViewStartDate = findViewById(R.id.text_course_start_date_output);
+        textViewEndDate = findViewById(R.id.text_course_end_date_output);
+        textViewStatus = findViewById(R.id.text_course_status_output);
+        textViewNotes = findViewById(R.id.text_course_notes_output);
+
+        if(mCourseViewModel.getAllCourses() != null) {
+
+            mCourseViewModel.getAllCourses().observe(this, new Observer<List<CourseEntity>>() {
+
+                @Override
+                public void onChanged(@Nullable final List<CourseEntity> courses) {
+                    // Update the cached copy of the words in the adapter.
+                    SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                    for (CourseEntity c : courses) {
+                        if(c.getId()== getIntent().getIntExtra("mentorId", 0)){
+                            textViewCourseTitle.setText(c.getTitle());
+                            textViewStartDate.setText(formatter.format(c.getStartDate()));
+                            textViewEndDate.setText(formatter.format(c.getEndDate()));
+                            textViewStatus.setText(c.getStatus());
+                            textViewNotes.setText(c.getNotes());
+                        }
+                    }
+                }
+            });
+        }
+
+    }
+
+    private void loadMentorDetails() {
+        mMentorViewModel = new ViewModelProvider(this).get(MentorViewModel.class);
+        textViewMentor = findViewById(R.id.text_mentor_name_output);
+        textViewMentorPhone =findViewById(R.id.text_mentor_phone_output);
+        textViewMentorEmail =findViewById(R.id.text_mentor_email_output);
+        textViewNotes = findViewById(R.id.text_course_notes_output);
+
+        if(mMentorViewModel.getAllMentors() != null) {
+
+            mMentorViewModel.getAllMentors().observe(this, new Observer<List<MentorEntity>>() {
+
+                @Override
+                public void onChanged(@Nullable final List<MentorEntity> mentors) {
+                    // Update the cached copy of the words in the adapter.
+
+                    for (MentorEntity m : mentors) {
+
+                        if(m.getId()== getIntent().getIntExtra("mentorId", 0)){
+                            //todo: split into first and last name
+                            String name = m.getFirstName() + " " + m.getLastName();
+                            textViewMentor.setText(name);
+                            textViewMentorPhone.setText(m.getPhone());
+                            textViewMentorEmail.setText(m.getEmail());
+
+                        }
+                    }
+                }
+            });
+        }
+
+    }
+
+    private void editCourse() {
+        Intent intent = new Intent(CourseDetailsActivity.this, CourseEditActivity.class);
+        intent.putExtra("courseId", getIntent().getIntExtra("courseId",0));
+        intent.putExtra("mentorId", getIntent().getIntExtra("mentorId",0));
+        startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
     }
 
     private void deleteCourse(int courseId) {
@@ -113,53 +189,5 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
     }
 
-    public void loadCourseDetails(){
-        textViewCourseTitle = findViewById(R.id.text_course_add_title);
-        textViewStartDate = findViewById(R.id.text_course_start_date_output);
-        textViewEndDate = findViewById(R.id.text_course_end_date_output);
-        textViewStatus = findViewById(R.id.text_course_status_output);
-        textViewNotes = findViewById(R.id.text_course_notes_output);
-
-        if(getIntent().getStringExtra("title") != null){
-            textViewCourseTitle.setText(getIntent().getStringExtra("title"));
-            textViewStartDate.setText(getIntent().getStringExtra("startDate"));
-            textViewEndDate.setText(getIntent().getStringExtra("endDate"));
-            textViewStatus.setText(getIntent().getStringExtra("status"));
-            textViewNotes.setText(getIntent().getStringExtra("notes"));
-        }
-    }
-
-    private void loadMentorDetails() {
-        mMentorViewModel = new ViewModelProvider(this).get(MentorViewModel.class);
-        textViewMentor = findViewById(R.id.text_mentor_name_output);
-        textViewMentorPhone =findViewById(R.id.text_mentor_phone_output);
-        textViewMentorEmail =findViewById(R.id.text_mentor_email_output);
-        textViewNotes = findViewById(R.id.text_course_notes_output);
-
-        if(mMentorViewModel.getAllMentors() != null) {
-
-            mMentorViewModel.getAllMentors().observe(this, new Observer<List<MentorEntity>>() {
-
-                @Override
-                public void onChanged(@Nullable final List<MentorEntity> mentors) {
-                    // Update the cached copy of the words in the adapter.
-
-                    for (MentorEntity m : mentors) {
-
-                        if(m.getId()== getIntent().getIntExtra("mentorId", 0)){
-                            String name = m.getFirstName() + " " + m.getLastName();
-                            textViewMentor.setText(name);
-                            textViewMentorPhone.setText(m.getPhone());
-                            textViewMentorEmail.setText(m.getEmail());
-
-                        }
-                    }
-
-
-                }
-            });
-        }
-
-    }
 
 }

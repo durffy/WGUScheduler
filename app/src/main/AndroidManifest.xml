@@ -30,6 +30,10 @@
             android:label="@string/title_activity_courses"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".activities.CourseEditActivity"
+            android:label="@string/title_activity_course_edit"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activities.CourseAddActivity"
             android:label="@string/title_activity_courses"
             android:theme="@style/AppTheme.NoActionBar" />
