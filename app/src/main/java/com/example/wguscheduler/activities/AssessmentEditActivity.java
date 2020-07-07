@@ -1,6 +1,7 @@
 package com.example.wguscheduler.activities;
 
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.wguscheduler.R;
 import com.example.wguscheduler.entities.AssessmentEntity;
 import com.example.wguscheduler.viewmodel.AssessmentViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -19,7 +21,7 @@ import java.util.List;
 public class AssessmentEditActivity extends AppCompatActivity {
 
     private AssessmentViewModel mAssessmentViewModel;
-    private TextView editAssessmentTitle,
+    private EditText editAssessmentTitle,
             editAssessmentNotes,
             editAssessmentScheduledDate;
 
@@ -34,6 +36,9 @@ public class AssessmentEditActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         loadAssessmentDetails();
+
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+        fab.callOnClick();
 
     }
 
