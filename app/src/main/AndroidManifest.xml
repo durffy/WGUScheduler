@@ -22,6 +22,10 @@
             android:label="@string/title_activity_assessment_details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".activities.AssessmentEditActivity"
+            android:label="@string/title_activity_assessment_edit"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activities.CourseDetailsActivity"
             android:label="@string/title_activity_course_details"
             android:theme="@style/AppTheme.NoActionBar" />
