@@ -1,8 +1,12 @@
 package com.example.wguscheduler.activities;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -44,7 +48,29 @@ public class AssessmentDetailActivity extends AppCompatActivity{
         onBackPressed();
         return true;
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_detail, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if( id == R.id.item_delete){
+            deleteCourse(getIntent().getIntExtra("assessmentId",0));
+            return true;
+        }else if( id == R.id.item_edit){
+            editCourse();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    //C.R.U.D.
+    //create
+    //read
     private void loadAssessmentDetails() {
         mAssessmentViewModel = new ViewModelProvider(this).get(AssessmentViewModel.class);
 
@@ -68,6 +94,17 @@ public class AssessmentDetailActivity extends AppCompatActivity{
             });
         }
     }
+    //update
+    private void editCourse() {
+        onSupportNavigateUp();
+    }
+    //delete
+    private void deleteCourse(int assessmentId) {
+        mAssessmentViewModel.deleteAssessment(assessmentId);
+        onSupportNavigateUp();
+    }
+
+
 
 
 }
