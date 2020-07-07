@@ -31,6 +31,6 @@ public interface AssessmentDAO {
     void updateAssessment(AssessmentEntity assessment);
 
     //delete
-    @Delete
-    void deleteAssessment(AssessmentEntity assessment);
+    @Query ("DELETE FROM assessment_table WHERE id IS :assessmentId")
+    void deleteAssessment(int assessmentId);
 }

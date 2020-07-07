@@ -135,7 +135,6 @@ public class SchedulerRepository {
     public void deleteTerm(int termId) {
 
         executor.execute(new Runnable() {
-
             @Override
             public void run() {
                 mSchedulerDatabase.termDAO().deleteTerm(termId);
@@ -150,6 +149,16 @@ public class SchedulerRepository {
             @Override
             public void run() {
                 mSchedulerDatabase.courseDAO().deleteCourse(courseId);
+            }
+        });
+    }
+
+    public void deleteAssessment(int assessmentId) {
+        executor.execute(new Runnable() {
+
+            @Override
+            public void run() {
+                mSchedulerDatabase.assessmentDAO().deleteAssessment(assessmentId);
             }
         });
     }

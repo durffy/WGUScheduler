@@ -28,4 +28,8 @@ public class AssessmentViewModel extends AndroidViewModel {
     public void saveAssessment(AssessmentEntity assessment) {
         mSchedulerRepository.saveAssessment(assessment);
     }
+
+    public void deleteAssessment(int assessmentId) {
+        mSchedulerRepository.deleteAssessment(assessmentId);
+    }
 }
