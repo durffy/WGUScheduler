@@ -103,8 +103,4 @@ public class AssessmentDetailActivity extends AppCompatActivity{
         mAssessmentViewModel.deleteAssessment(assessmentId);
         onSupportNavigateUp();
     }
-
-
-
-
 }
