@@ -1,6 +1,8 @@
 package com.example.wguscheduler.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -15,12 +17,15 @@ import com.example.wguscheduler.entities.AssessmentEntity;
 import com.example.wguscheduler.viewmodel.AssessmentViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class AssessmentEditActivity extends AppCompatActivity {
 
     private AssessmentViewModel mAssessmentViewModel;
+    private AssessmentEntity mAssessment;
     private EditText editAssessmentTitle,
             editAssessmentNotes,
             editAssessmentScheduledDate;
@@ -38,7 +43,16 @@ public class AssessmentEditActivity extends AppCompatActivity {
         loadAssessmentDetails();
 
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
-        fab.callOnClick();
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    saveAssessment();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 
@@ -69,10 +83,27 @@ public class AssessmentEditActivity extends AppCompatActivity {
                             editAssessmentTitle.setText(a.getTitle());
                             editAssessmentScheduledDate.setText(formatter.format(a.getScheduledDate()));
                             editAssessmentNotes.setText(a.getNotes());
+                            mAssessment = a;
                         }
                     }
                 }
             });
         }
     }
+    //update
+    private void saveAssessment() throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+
+        String title = editAssessmentTitle.getText().toString();
+        Date scheduledDate = formatter.parse(editAssessmentScheduledDate.getText().toString());
+        String notes = editAssessmentNotes.getText().toString();
+
+        mAssessment.setTitle(title);
+        mAssessment.setScheduledDate(scheduledDate);
+        mAssessment.setNotes(notes);
+
+        mAssessmentViewModel.saveAssessment(mAssessment);
+        onSupportNavigateUp();
+    }
+    //delete
 }
