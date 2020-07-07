@@ -1,5 +1,6 @@
 package com.example.wguscheduler.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +24,7 @@ import java.util.List;
 
 public class AssessmentDetailActivity extends AppCompatActivity{
 
+    private static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private AssessmentViewModel mAssessmentViewModel;
     private TextView textViewAssessmentTitle,
         textViewAssessmentNotes,
@@ -96,6 +98,9 @@ public class AssessmentDetailActivity extends AppCompatActivity{
     }
     //update
     private void editCourse() {
+        Intent intent = new Intent(AssessmentDetailActivity.this, AssessmentEditActivity.class);
+        intent.putExtra("assessmentId", getIntent().getIntExtra("assessmentId", 0));
+        startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
         onSupportNavigateUp();
     }
     //delete
