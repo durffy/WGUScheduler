@@ -16,5 +16,6 @@
     <string name="title_activity_add_assessment">AssessmentAdd</string>
     <string name="title_activity_course_edit">Course Edit</string>
     <string name="title_activity_assessment_edit">Edit Assessment</string>
+    <string name="title_activity_term_edit">Edit Term</string>
 
 </resources>
