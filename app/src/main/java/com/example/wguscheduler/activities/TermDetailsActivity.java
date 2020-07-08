@@ -52,7 +52,6 @@ public class TermDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        mTermViewModel = new ViewModelProvider(this).get(TermViewModel.class);
         mCourseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);;
 
         loadTermDetails();
@@ -106,7 +105,9 @@ public class TermDetailsActivity extends AppCompatActivity {
     //create
     //read
     public void loadTermDetails(){
-        textViewTermTitle = findViewById(R.id.text_term_edit_title);
+        mTermViewModel = new ViewModelProvider(this).get(TermViewModel.class);
+
+        textViewTermTitle = findViewById(R.id.text_term_detail_title);
         textViewStartDate = findViewById(R.id.text_term_start_date_output);
         textViewEndDate = findViewById(R.id.text_term_end_date_output);
         if(mTermViewModel.getAllTerms() != null) {
@@ -116,9 +117,10 @@ public class TermDetailsActivity extends AppCompatActivity {
                     SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
                     for (TermEntity t : terms) {
                         if(t.getId() == getIntent().getIntExtra("termId", 0)){
-                            textViewTermTitle.setText(getIntent().getStringExtra("title"));
-                            textViewStartDate.setText(getIntent().getStringExtra("startDate"));
-                            textViewEndDate.setText(getIntent().getStringExtra("endDate"));
+                            Log.d(TAG, "onChanged: "+getIntent().getStringExtra("title"));
+                            textViewTermTitle.setText(t.getTitle());
+                            textViewStartDate.setText(formatter.format(t.getStartDate()));
+                            textViewEndDate.setText(formatter.format(t.getEndDate()));
                         }
                     }
                 }

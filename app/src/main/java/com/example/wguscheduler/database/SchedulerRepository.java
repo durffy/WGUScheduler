@@ -67,7 +67,6 @@ public class SchedulerRepository {
 
         });
     }
-
     public void saveCourse(CourseEntity course) {
 
         executor.execute(new Runnable() {
@@ -87,7 +86,6 @@ public class SchedulerRepository {
 
         });
     }
-
     public void saveAssessment(AssessmentEntity assessment) {
         executor.execute(new Runnable() {
             @Override

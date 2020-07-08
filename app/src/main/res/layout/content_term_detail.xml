@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/text_term_edit_title"
+        android:id="@+id/text_term_detail_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -26,7 +26,7 @@
         android:layout_marginTop="8dp"
         android:text="Start Date: "
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_term_edit_title" />
+        app:layout_constraintTop_toBottomOf="@+id/text_term_detail_title" />
 
     <TextView
         android:id="@+id/text_term_end_date"
@@ -46,7 +46,7 @@
         android:layout_marginTop="8dp"
         android:text="label_term_start_date_output"
         app:layout_constraintStart_toEndOf="@+id/text_term_start_date"
-        app:layout_constraintTop_toBottomOf="@+id/text_term_edit_title" />
+        app:layout_constraintTop_toBottomOf="@+id/text_term_detail_title" />
 
     <TextView
         android:id="@+id/text_term_end_date_output"
