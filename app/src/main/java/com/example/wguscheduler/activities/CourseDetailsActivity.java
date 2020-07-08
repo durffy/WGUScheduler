@@ -40,6 +40,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
             textViewMentor, textViewMentorPhone, textViewMentorEmail;
     private MentorViewModel mMentorViewModel;
     private CourseViewModel mCourseViewModel;
+    private CourseEntity mCourse;
 
 
 
@@ -79,21 +80,35 @@ public class CourseDetailsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_detail, menu);
+        inflater.inflate(R.menu.menu_sharing, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if( id == R.id.item_delete){
-            deleteCourse(getIntent().getIntExtra("courseId",0));
+        if( id == R.id.item_delete) {
+            deleteCourse(getIntent().getIntExtra("courseId", 0));
+            return true;
+        }else if (id == R.id.item_share){
+            share();
             return true;
         }else if( id == R.id.item_edit){
             editCourse();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void share() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, mCourse.getCourse());
+        intent.putExtra(Intent.EXTRA_TITLE, mCourse.getTitle());
+        intent.setType("text/plain");
+
+        Intent share = Intent.createChooser(intent, null);
+        startActivity(share);
     }
 
 
@@ -119,6 +134,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
                             textViewEndDate.setText(formatter.format(c.getEndDate()));
                             textViewStatus.setText(c.getStatus());
                             textViewNotes.setText(c.getNotes());
+                            mCourse = c;
                         }
                     }
                 }
@@ -156,7 +172,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
 
     private void editCourse() {
