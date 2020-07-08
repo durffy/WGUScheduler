@@ -22,9 +22,11 @@ import android.widget.TextView;
 
 import com.example.wguscheduler.R;
 import com.example.wguscheduler.entities.CourseEntity;
+import com.example.wguscheduler.entities.TermEntity;
 import com.example.wguscheduler.viewmodel.CourseViewModel;
 import com.example.wguscheduler.viewmodel.TermViewModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +52,6 @@ public class TermDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        mTermViewModel = new ViewModelProvider(this).get(TermViewModel.class);
         mCourseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);;
 
         loadTermDetails();
@@ -69,19 +70,7 @@ public class TermDetailsActivity extends AppCompatActivity {
 
     }
 
-    /*
-        set the fields from the intent extras
-     */
-    public void loadTermDetails(){
-        textViewTermTitle = findViewById(R.id.text_term_title);
-        textViewStartDate = findViewById(R.id.text_term_start_date_output);
-        textViewEndDate = findViewById(R.id.text_term_end_date_output);
-        if(getIntent().getStringExtra("title") != null){
-            textViewTermTitle.setText(getIntent().getStringExtra("title"));
-            textViewStartDate.setText(getIntent().getStringExtra("startDate"));
-            textViewEndDate.setText(getIntent().getStringExtra("endDate"));
-        }
-    }
+
 
     // add support for going back a screen
     @Override
@@ -103,11 +92,49 @@ public class TermDetailsActivity extends AppCompatActivity {
         if( id == R.id.item_delete){
             deleteTerm(getIntent().getIntExtra("termId",0));
             return true;
+        }else if( id == R.id.item_edit){
+            editTerm();
+            return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
 
+    //CRUD
+    //create
+    //read
+    public void loadTermDetails(){
+        mTermViewModel = new ViewModelProvider(this).get(TermViewModel.class);
+
+        textViewTermTitle = findViewById(R.id.text_term_detail_title);
+        textViewStartDate = findViewById(R.id.text_term_start_date_output);
+        textViewEndDate = findViewById(R.id.text_term_end_date_output);
+        if(mTermViewModel.getAllTerms() != null) {
+            mTermViewModel.getAllTerms().observe(this, new Observer<List<TermEntity>>() {
+                @Override
+                public void onChanged(@Nullable final List<TermEntity> terms) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                    for (TermEntity t : terms) {
+                        if(t.getId() == getIntent().getIntExtra("termId", 0)){
+                            Log.d(TAG, "onChanged: "+getIntent().getStringExtra("title"));
+                            textViewTermTitle.setText(t.getTitle());
+                            textViewStartDate.setText(formatter.format(t.getStartDate()));
+                            textViewEndDate.setText(formatter.format(t.getEndDate()));
+                        }
+                    }
+                }
+            });
+        }
+    }
+    //update
+    private void editTerm() {
+        Intent intent = new Intent(TermDetailsActivity.this, TermEditActivity.class);
+        Log.d(TAG, "onClick(): getIntent termId: " + getIntent().getIntExtra("termId", 0));
+        intent.putExtra("termId", getIntent().getIntExtra("termId", 0));
+        startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+    }
+    //delete
     private void deleteTerm(int termId) {
 
         //build the alert message

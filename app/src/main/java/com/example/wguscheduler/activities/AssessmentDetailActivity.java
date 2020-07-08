@@ -64,7 +64,7 @@ public class AssessmentDetailActivity extends AppCompatActivity{
             deleteCourse(getIntent().getIntExtra("assessmentId",0));
             return true;
         }else if( id == R.id.item_edit){
-            editCourse();
+            editAssessment();
         }
 
         return super.onOptionsItemSelected(item);
@@ -97,7 +97,7 @@ public class AssessmentDetailActivity extends AppCompatActivity{
         }
     }
     //update
-    private void editCourse() {
+    private void editAssessment() {
         Intent intent = new Intent(AssessmentDetailActivity.this, AssessmentEditActivity.class);
         intent.putExtra("assessmentId", getIntent().getIntExtra("assessmentId", 0));
         startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);

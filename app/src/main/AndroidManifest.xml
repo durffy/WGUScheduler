@@ -46,6 +46,10 @@
             android:label="@string/title_activity_term_details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".activities.TermEditActivity"
+            android:label="@string/title_activity_term_edit"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activities.TermAddActivity"
             android:label="@string/title_activity_term_add"
             android:theme="@style/AppTheme.NoActionBar" />
