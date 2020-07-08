@@ -69,19 +69,7 @@ public class TermDetailsActivity extends AppCompatActivity {
 
     }
 
-    /*
-        set the fields from the intent extras
-     */
-    public void loadTermDetails(){
-        textViewTermTitle = findViewById(R.id.text_term_title);
-        textViewStartDate = findViewById(R.id.text_term_start_date_output);
-        textViewEndDate = findViewById(R.id.text_term_end_date_output);
-        if(getIntent().getStringExtra("title") != null){
-            textViewTermTitle.setText(getIntent().getStringExtra("title"));
-            textViewStartDate.setText(getIntent().getStringExtra("startDate"));
-            textViewEndDate.setText(getIntent().getStringExtra("endDate"));
-        }
-    }
+
 
     // add support for going back a screen
     @Override
@@ -108,6 +96,24 @@ public class TermDetailsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //CRUD
+    //create
+    //read
+        /*
+        set the fields from the intent extras
+     */
+    public void loadTermDetails(){
+        textViewTermTitle = findViewById(R.id.text_term_title);
+        textViewStartDate = findViewById(R.id.text_term_start_date_output);
+        textViewEndDate = findViewById(R.id.text_term_end_date_output);
+        if(getIntent().getStringExtra("title") != null){
+            textViewTermTitle.setText(getIntent().getStringExtra("title"));
+            textViewStartDate.setText(getIntent().getStringExtra("startDate"));
+            textViewEndDate.setText(getIntent().getStringExtra("endDate"));
+        }
+    }
+    //update
+    //delete
     private void deleteTerm(int termId) {
 
         //build the alert message
