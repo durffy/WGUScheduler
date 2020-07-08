@@ -22,9 +22,11 @@ import android.widget.TextView;
 
 import com.example.wguscheduler.R;
 import com.example.wguscheduler.entities.CourseEntity;
+import com.example.wguscheduler.entities.TermEntity;
 import com.example.wguscheduler.viewmodel.CourseViewModel;
 import com.example.wguscheduler.viewmodel.TermViewModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,10 +109,20 @@ public class TermDetailsActivity extends AppCompatActivity {
         textViewTermTitle = findViewById(R.id.text_term_edit_title);
         textViewStartDate = findViewById(R.id.text_term_start_date_output);
         textViewEndDate = findViewById(R.id.text_term_end_date_output);
-        if(getIntent().getStringExtra("title") != null){
-            textViewTermTitle.setText(getIntent().getStringExtra("title"));
-            textViewStartDate.setText(getIntent().getStringExtra("startDate"));
-            textViewEndDate.setText(getIntent().getStringExtra("endDate"));
+        if(mTermViewModel.getAllTerms() != null) {
+            mTermViewModel.getAllTerms().observe(this, new Observer<List<TermEntity>>() {
+                @Override
+                public void onChanged(@Nullable final List<TermEntity> terms) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                    for (TermEntity t : terms) {
+                        if(t.getId() == getIntent().getIntExtra("termId", 0)){
+                            textViewTermTitle.setText(getIntent().getStringExtra("title"));
+                            textViewStartDate.setText(getIntent().getStringExtra("startDate"));
+                            textViewEndDate.setText(getIntent().getStringExtra("endDate"));
+                        }
+                    }
+                }
+            });
         }
     }
     //update
