@@ -91,7 +91,11 @@ public class TermDetailsActivity extends AppCompatActivity {
         if( id == R.id.item_delete){
             deleteTerm(getIntent().getIntExtra("termId",0));
             return true;
+        }else if( id == R.id.item_edit){
+            editTerm();
+            return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -99,11 +103,8 @@ public class TermDetailsActivity extends AppCompatActivity {
     //CRUD
     //create
     //read
-        /*
-        set the fields from the intent extras
-     */
     public void loadTermDetails(){
-        textViewTermTitle = findViewById(R.id.text_term_title);
+        textViewTermTitle = findViewById(R.id.text_term_edit_title);
         textViewStartDate = findViewById(R.id.text_term_start_date_output);
         textViewEndDate = findViewById(R.id.text_term_end_date_output);
         if(getIntent().getStringExtra("title") != null){
@@ -113,6 +114,12 @@ public class TermDetailsActivity extends AppCompatActivity {
         }
     }
     //update
+    private void editTerm() {
+        Intent intent = new Intent(TermDetailsActivity.this, TermEditActivity.class);
+        Log.d(TAG, "onClick(): getIntent termId: " + getIntent().getIntExtra("termId", 0));
+        intent.putExtra("termId", getIntent().getIntExtra("termId", 0));
+        startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+    }
     //delete
     private void deleteTerm(int termId) {
 
