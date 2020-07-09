@@ -23,7 +23,7 @@ import com.example.wguscheduler.utilities.Converters;
         AssessmentEntity.class,
         CourseEntity.class,
         MentorEntity.class},
-        version = 8)
+        version = 9)
 @TypeConverters({Converters.class})
 public abstract class SchedulerDatabase extends RoomDatabase {
     public abstract CourseDAO courseDAO();
