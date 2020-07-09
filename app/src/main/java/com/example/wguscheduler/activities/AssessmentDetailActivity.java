@@ -1,5 +1,8 @@
 package com.example.wguscheduler.activities;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,18 +20,22 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.wguscheduler.R;
 import com.example.wguscheduler.entities.AssessmentEntity;
 import com.example.wguscheduler.entities.CourseEntity;
+import com.example.wguscheduler.utilities.NotificationReceiver;
 import com.example.wguscheduler.viewmodel.AssessmentViewModel;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 public class AssessmentDetailActivity extends AppCompatActivity{
 
     private static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private AssessmentViewModel mAssessmentViewModel;
+    private AssessmentEntity mAssessment;
     private TextView textViewAssessmentTitle,
         textViewAssessmentNotes,
         textViewAssessmentScheduledDate;
+    private Calendar mCalendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +60,9 @@ public class AssessmentDetailActivity extends AppCompatActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_detail, menu);
+        inflater.inflate(R.menu.menu_sharing, menu);
+        MenuItem item = menu.findItem(R.id.item_share);
+        item.setVisible(false);
         return true;
     }
 
@@ -65,9 +74,22 @@ public class AssessmentDetailActivity extends AppCompatActivity{
             return true;
         }else if( id == R.id.item_edit){
             editAssessment();
+        }else if(id == R.id.item_notification){
+            notification();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void notification() {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        Calendar cal = Calendar.getInstance();
+        Intent intent = new Intent(AssessmentDetailActivity.this, NotificationReceiver.class);
+        intent.putExtra("key", "Scheduled Assessment: "+ formatter.format(mAssessment.getScheduledDate()));
+        PendingIntent sender = PendingIntent.getBroadcast(AssessmentDetailActivity.this, 1, intent, 0);
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        cal.setTime(mAssessment.getScheduledDate());
+        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis() , sender);
     }
 
     //C.R.U.D.
@@ -90,6 +112,7 @@ public class AssessmentDetailActivity extends AppCompatActivity{
                             textViewAssessmentTitle.setText(a.getTitle());
                             textViewAssessmentScheduledDate.setText(formatter.format(a.getScheduledDate()));
                             textViewAssessmentNotes.setText(a.getNotes());
+                            mAssessment = a;
                         }
                     }
                 }

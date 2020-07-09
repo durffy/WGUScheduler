@@ -25,7 +25,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         createNotificationChannel(context,mChannelId);
 
         Notification n = new NotificationCompat.Builder(context, mChannelId)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_baseline_school_24)
                 .setContentText(intent.getStringExtra("key"))
                 .setContentTitle("Test:"+ Integer.toString(mNotificationId)).build();
 
