@@ -42,8 +42,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
     private CourseViewModel mCourseViewModel;
     private CourseEntity mCourse;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,7 +109,9 @@ public class CourseDetailsActivity extends AppCompatActivity {
         startActivity(share);
     }
 
-
+    //CRUD
+    //create
+    //read
     public void loadCourseDetails(){
         textViewCourseTitle = findViewById(R.id.text_course_add_title);
         textViewStartDate = findViewById(R.id.text_course_start_date_output);
@@ -134,6 +134,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
                             textViewEndDate.setText(formatter.format(c.getEndDate()));
                             textViewStatus.setText(c.getStatus());
                             textViewNotes.setText(c.getNotes());
+
                             mCourse = c;
                         }
                     }
@@ -173,14 +174,14 @@ public class CourseDetailsActivity extends AppCompatActivity {
             });
         }
     }
-
+    //update
     private void editCourse() {
         Intent intent = new Intent(CourseDetailsActivity.this, CourseEditActivity.class);
         intent.putExtra("courseId", getIntent().getIntExtra("courseId",0));
         intent.putExtra("mentorId", getIntent().getIntExtra("mentorId",0));
         startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
     }
-
+    //delete
     private void deleteCourse(int courseId) {
         //build the alert message
         AlertDialog.Builder builder = new AlertDialog.Builder(CourseDetailsActivity.this);
