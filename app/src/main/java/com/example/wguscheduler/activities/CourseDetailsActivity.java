@@ -1,11 +1,15 @@
 package com.example.wguscheduler.activities;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.wguscheduler.entities.CourseEntity;
 import com.example.wguscheduler.entities.MentorEntity;
+import com.example.wguscheduler.utilities.NotificationReceiver;
 import com.example.wguscheduler.viewmodel.CourseViewModel;
 import com.example.wguscheduler.viewmodel.MentorViewModel;
 
@@ -17,7 +21,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,6 +31,7 @@ import android.widget.TextView;
 import com.example.wguscheduler.R;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 public class CourseDetailsActivity extends AppCompatActivity {
@@ -93,9 +97,24 @@ public class CourseDetailsActivity extends AppCompatActivity {
             return true;
         }else if( id == R.id.item_edit){
             editCourse();
+            return true;
+        }else if( id == R.id.item_notification) {
+            notification();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void notification() {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        Calendar cal = Calendar.getInstance();
+        Intent intent = new Intent(CourseDetailsActivity.this, NotificationReceiver.class);
+        intent.putExtra("key", "Test Short Message");
+        PendingIntent sender = PendingIntent.getBroadcast(CourseDetailsActivity.this, 0, intent, 0);
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        cal.setTime(mCourse.getEndDate());
+        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis() , sender);
     }
 
     private void share() {
