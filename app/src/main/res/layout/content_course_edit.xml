@@ -94,6 +94,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/text_margin"
                     android:layout_marginTop="@dimen/text_margin"
+                    android:focusable="false"
                     android:hint="edit_course_edit_start" />
             </LinearLayout>
 
@@ -116,6 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/text_margin"
                     android:layout_marginTop="@dimen/text_margin"
+                    android:focusable="false"
                     android:hint="edit_course_edit_status" />
 
             </LinearLayout>

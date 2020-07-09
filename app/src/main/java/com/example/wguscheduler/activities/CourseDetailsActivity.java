@@ -40,8 +40,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
             textViewMentor, textViewMentorPhone, textViewMentorEmail;
     private MentorViewModel mMentorViewModel;
     private CourseViewModel mCourseViewModel;
-
-
+    private CourseEntity mCourse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,15 +78,18 @@ public class CourseDetailsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_detail, menu);
+        inflater.inflate(R.menu.menu_sharing, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if( id == R.id.item_delete){
-            deleteCourse(getIntent().getIntExtra("courseId",0));
+        if( id == R.id.item_delete) {
+            deleteCourse(getIntent().getIntExtra("courseId", 0));
+            return true;
+        }else if (id == R.id.item_share){
+            share();
             return true;
         }else if( id == R.id.item_edit){
             editCourse();
@@ -96,7 +98,20 @@ public class CourseDetailsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void share() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, mCourse.getCourse());
+        intent.putExtra(Intent.EXTRA_TITLE, mCourse.getTitle());
+        intent.setType("text/plain");
 
+        Intent share = Intent.createChooser(intent, null);
+        startActivity(share);
+    }
+
+    //CRUD
+    //create
+    //read
     public void loadCourseDetails(){
         textViewCourseTitle = findViewById(R.id.text_course_add_title);
         textViewStartDate = findViewById(R.id.text_course_start_date_output);
@@ -119,6 +134,8 @@ public class CourseDetailsActivity extends AppCompatActivity {
                             textViewEndDate.setText(formatter.format(c.getEndDate()));
                             textViewStatus.setText(c.getStatus());
                             textViewNotes.setText(c.getNotes());
+
+                            mCourse = c;
                         }
                     }
                 }
@@ -156,16 +173,15 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
-
+    //update
     private void editCourse() {
         Intent intent = new Intent(CourseDetailsActivity.this, CourseEditActivity.class);
         intent.putExtra("courseId", getIntent().getIntExtra("courseId",0));
         intent.putExtra("mentorId", getIntent().getIntExtra("mentorId",0));
         startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
     }
-
+    //delete
     private void deleteCourse(int courseId) {
         //build the alert message
         AlertDialog.Builder builder = new AlertDialog.Builder(CourseDetailsActivity.this);
