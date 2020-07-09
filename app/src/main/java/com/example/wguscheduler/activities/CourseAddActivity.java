@@ -1,9 +1,11 @@
 package com.example.wguscheduler.activities;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
@@ -23,8 +25,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class CourseAddActivity extends AppCompatActivity {
 
@@ -34,6 +38,9 @@ public class CourseAddActivity extends AppCompatActivity {
     private EditText mCourseTitle, mCourseStartDate, mCourseEndDate,mCourseNotes,
         mMentorFirstName, mMentorLastName, mMentorEmail, mMentorPhone;
     private MentorEntity mMentor;
+    private Calendar mEndCalendar = Calendar.getInstance();
+    private Calendar mStartCalendar = Calendar.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,10 +61,17 @@ public class CourseAddActivity extends AppCompatActivity {
         mCourseStartDate = findViewById(R.id.edit_course_add_start);
         mCourseEndDate = findViewById(R.id.edit_course_add_end);
         mCourseNotes = findViewById(R.id.edit_course_add_notes);
-        mMentorFirstName = findViewById(R.id.edit_mentor_first);
-        mMentorLastName = findViewById(R.id.edit_mentor_last);
-        mMentorEmail = findViewById(R.id.edit_mentor_email);
-        mMentorPhone = findViewById(R.id.edit_mentor_phone);
+        mMentorFirstName = findViewById(R.id.edit_mentor_add_first);
+        mMentorLastName = findViewById(R.id.edit_mentor_add_last);
+        mMentorEmail = findViewById(R.id.edit_mentor_add_email);
+        mMentorPhone = findViewById(R.id.edit_mentor_add_phone);
+
+        try {
+            loadStartDatePicker();
+            loadEndDatePicker();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -72,19 +86,75 @@ public class CourseAddActivity extends AppCompatActivity {
         });
     }
 
+    private void loadStartDatePicker() throws ParseException {
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                mStartCalendar.set(Calendar.YEAR, year);
+                mStartCalendar.set(Calendar.MONTH, monthOfYear);
+                mStartCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateStartLabel();
+
+            }
+        };
+
+        mCourseStartDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(CourseAddActivity.this,date, mStartCalendar.get(Calendar.YEAR), mStartCalendar.get(Calendar.MONTH),
+                        mStartCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+    }
+
+    private void updateStartLabel() {
+        String myFormat = "MM/dd/yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        mCourseStartDate.setText(sdf.format(mStartCalendar.getTime()));
+
+    }
+
+    private void loadEndDatePicker() throws ParseException {
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                mEndCalendar.set(Calendar.YEAR, year);
+                mEndCalendar.set(Calendar.MONTH, monthOfYear);
+                mEndCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateEndLabel();
+            }
+        };
+
+        mCourseEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(CourseAddActivity.this,date, mEndCalendar.get(Calendar.YEAR), mEndCalendar.get(Calendar.MONTH),
+                        mEndCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
+            }
+        });
+    }
+
+    private void updateEndLabel() {
+        String myFormat = "MM/dd/yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        mCourseEndDate.setText(sdf.format(mEndCalendar.getTime()));
+    }
+
     private void saveCourse() throws ParseException{
 
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         verifyMentor();
         int termId = getIntent().getIntExtra("termId", 0);
-        int mentorId = mMentor.getId();
+        //int mentorId = mMentor.getId();
         String title = mCourseTitle.getText().toString();
         String status = "Plan to Take";
         Date start = formatter.parse(mCourseStartDate.getText().toString());
         Date end = formatter.parse(mCourseEndDate.getText().toString());
         String notes = mCourseNotes.getText().toString();
 
-        CourseEntity course = new CourseEntity(termId, mentorId, title, status, start, end, notes);
+        CourseEntity course = new CourseEntity(termId, mMentor.getId(), title, status, start, end, notes);
+        Log.d(TAG, "saveCourse: " + course.getCourse());
         mCourseViewModel.saveCourse(course);
         onSupportNavigateUp();
     }
