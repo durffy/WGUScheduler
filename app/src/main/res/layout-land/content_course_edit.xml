@@ -123,7 +123,7 @@
                     android:layout_marginTop="@dimen/text_margin"
                     android:layout_marginEnd="@dimen/text_margin"
                     android:focusable="false"
-                    android:hint="edit_course_edit_status" />
+                    android:hint="edit_course_edit_end" />
 
             </LinearLayout>
 
