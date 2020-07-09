@@ -45,6 +45,7 @@
         android:layout_marginTop="@dimen/edit_input_vertical"
         android:layout_marginEnd="@dimen/edit_input_large"
         android:hint="MM/dd/yyyy"
+        android:focusable="false"
         android:ems="10"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"

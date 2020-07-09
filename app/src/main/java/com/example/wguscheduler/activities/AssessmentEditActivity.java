@@ -1,10 +1,10 @@
 package com.example.wguscheduler.activities;
 
-import android.content.Intent;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,16 +19,19 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AssessmentEditActivity extends AppCompatActivity {
 
     private AssessmentViewModel mAssessmentViewModel;
     private AssessmentEntity mAssessment;
-    private EditText editAssessmentTitle,
-            editAssessmentNotes,
-            editAssessmentScheduledDate;
+    private EditText mEditAssessmentTitle,
+            mEditAssessmentNotes,
+            mEditAssessmentScheduledDate;
+    private Calendar mScheduleCalendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,7 @@ public class AssessmentEditActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         loadAssessmentDetails();
+        loadScheduleDatePicker();
 
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -63,15 +67,42 @@ public class AssessmentEditActivity extends AppCompatActivity {
         return true;
     }
 
+    private void loadScheduleDatePicker() {
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                mScheduleCalendar.set(Calendar.YEAR, year);
+                mScheduleCalendar.set(Calendar.MONTH, monthOfYear);
+                mScheduleCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateScheduleLabel();
+
+            }
+        };
+
+        mEditAssessmentScheduledDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(AssessmentEditActivity.this, date, mScheduleCalendar.get(Calendar.YEAR), mScheduleCalendar.get(Calendar.MONTH),
+                        mScheduleCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+    }
+
+    private void updateScheduleLabel() {
+        String myFormat = "MM/dd/yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        mEditAssessmentScheduledDate.setText(sdf.format(mScheduleCalendar.getTime()));
+    }
+
     //C.R.U.D.
     //create
     //read
     private void loadAssessmentDetails() {
         mAssessmentViewModel = new ViewModelProvider(this).get(AssessmentViewModel.class);
 
-        editAssessmentTitle = findViewById(R.id.edit_assessment_edit_title);
-        editAssessmentScheduledDate = findViewById(R.id.edit_assessment_edit_scheduled_date);
-        editAssessmentNotes = findViewById(R.id.edit_assessment_edit_notes);
+        mEditAssessmentTitle = findViewById(R.id.edit_assessment_edit_title);
+        mEditAssessmentScheduledDate = findViewById(R.id.edit_assessment_edit_scheduled_date);
+        mEditAssessmentNotes = findViewById(R.id.edit_assessment_edit_notes);
 
         if(mAssessmentViewModel.getAllAssessments() != null) {
             mAssessmentViewModel.getAllAssessments().observe(this, new Observer<List<AssessmentEntity>>() {
@@ -80,10 +111,11 @@ public class AssessmentEditActivity extends AppCompatActivity {
                     SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
                     for (AssessmentEntity a : assessments) {
                         if(a.getId()== getIntent().getIntExtra("assessmentId", 0)){
-                            editAssessmentTitle.setText(a.getTitle());
-                            editAssessmentScheduledDate.setText(formatter.format(a.getScheduledDate()));
-                            editAssessmentNotes.setText(a.getNotes());
+                            mEditAssessmentTitle.setText(a.getTitle());
+                            mEditAssessmentScheduledDate.setText(formatter.format(a.getScheduledDate()));
+                            mEditAssessmentNotes.setText(a.getNotes());
                             mAssessment = a;
+                            mScheduleCalendar.setTime(mAssessment.getScheduledDate());
                         }
                     }
                 }
@@ -94,9 +126,9 @@ public class AssessmentEditActivity extends AppCompatActivity {
     private void saveAssessment() throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
-        String title = editAssessmentTitle.getText().toString();
-        Date scheduledDate = formatter.parse(editAssessmentScheduledDate.getText().toString());
-        String notes = editAssessmentNotes.getText().toString();
+        String title = mEditAssessmentTitle.getText().toString();
+        Date scheduledDate = formatter.parse(mEditAssessmentScheduledDate.getText().toString());
+        String notes = mEditAssessmentNotes.getText().toString();
 
         mAssessment.setTitle(title);
         mAssessment.setScheduledDate(scheduledDate);
