@@ -147,7 +147,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
                     // Update the cached copy of the words in the adapter.
                     SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
                     for (CourseEntity c : courses) {
-                        if(c.getId()== getIntent().getIntExtra("mentorId", 0)){
+                        if(c.getId()== getIntent().getIntExtra("courseId", 0)){
                             textViewCourseTitle.setText(c.getTitle());
                             textViewStartDate.setText(formatter.format(c.getStartDate()));
                             textViewEndDate.setText(formatter.format(c.getEndDate()));
