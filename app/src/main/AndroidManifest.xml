@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.wguscheduler">
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <receiver
+            android:name="com.example.wguscheduler.utilities.NotificationReceiver"
+            android:exported="true"
+            android:enabled="true"/>
+
         <activity
             android:name=".activities.AssessmentAddActivity"
             android:label="@string/title_activity_add_assessment"

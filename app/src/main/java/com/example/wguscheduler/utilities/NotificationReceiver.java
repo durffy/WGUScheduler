@@ -21,12 +21,12 @@ public class NotificationReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context, intent.getStringExtra(""), Toast.LENGTH_LONG).show();
+        Toast.makeText(context, intent.getStringExtra("key"), Toast.LENGTH_LONG).show();
         createNotificationChannel(context,mChannelId);
 
         Notification n = new NotificationCompat.Builder(context, mChannelId)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentText(intent.getStringExtra(""))
+                .setContentText(intent.getStringExtra("key"))
                 .setContentTitle("Test:"+ Integer.toString(mNotificationId)).build();
 
         NotificationManager notificationManager = (NotificationManager)context
