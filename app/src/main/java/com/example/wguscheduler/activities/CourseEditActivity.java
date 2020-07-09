@@ -99,6 +99,7 @@ public class CourseEditActivity extends AppCompatActivity {
                 mStartCalendar.set(Calendar.MONTH, monthOfYear);
                 mStartCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateStartLabel();
+
             }
         };
 
