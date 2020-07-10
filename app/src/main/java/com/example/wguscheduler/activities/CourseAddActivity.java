@@ -162,7 +162,7 @@ public class CourseAddActivity extends AppCompatActivity {
 
     private void verifyMentor() {
 
-        if(mMentorViewModel.getAllMentors()==null) {
+        if(mMentorViewModel.getAllMentors()!=null) {
             Log.d(TAG, "verifyMentor: notNull" + mMentorViewModel.getAllMentors());
             mMentorViewModel.getAllMentors().observe(this, new Observer<List<MentorEntity>>() {
                 @Override
