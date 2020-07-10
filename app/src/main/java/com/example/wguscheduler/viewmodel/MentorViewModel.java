@@ -23,7 +23,6 @@ public class MentorViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<MentorEntity>> getAllMentors(){
-
         return mAllMentors;
     }
 

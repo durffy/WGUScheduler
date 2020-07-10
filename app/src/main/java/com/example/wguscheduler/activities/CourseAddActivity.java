@@ -162,21 +162,34 @@ public class CourseAddActivity extends AppCompatActivity {
 
     private void verifyMentor() {
 
-        mMentorViewModel.getAllMentors().observe(this, new Observer<List<MentorEntity>>() {
-            @Override
-            public void onChanged(@Nullable final List<MentorEntity> mentors) {
-                String first = mMentorFirstName.getText().toString();
-                String last = mMentorLastName.getText().toString();
-                String phone = mMentorPhone.getText().toString();
-                String email = mMentorEmail.getText().toString();
+        if(mMentorViewModel.getAllMentors()==null) {
+            Log.d(TAG, "verifyMentor: notNull" + mMentorViewModel.getAllMentors());
+            mMentorViewModel.getAllMentors().observe(this, new Observer<List<MentorEntity>>() {
+                @Override
+                public void onChanged(@Nullable final List<MentorEntity> mentors) {
+                    String first = mMentorFirstName.getText().toString();
+                    String last = mMentorLastName.getText().toString();
+                    String phone = mMentorPhone.getText().toString();
+                    String email = mMentorEmail.getText().toString();
 
-                //filter by email, emails should be unique to each person
-                mMentor = mentors.stream().filter(m -> m.getEmail().contains(email))
-                        .findFirst().orElse(mMentor = new MentorEntity(mentors.size() + 1, first, last, phone, email));
-                Log.d(TAG, "VerifyMentor().onChanged(): "+ mMentor.getId());
-                saveMentor(mMentor);
-            }
-        });
+                    //filter by email, emails should be unique to each person
+                    mMentor = mentors.stream().filter(m -> m.getEmail().contains(email))
+                            .findFirst().orElse(mMentor = new MentorEntity(mentors.size() +1, first, last, phone, email));
+
+                    Log.d(TAG, "onChanged(): " + mentors.size() + 1);
+                    saveMentor(mMentor);
+                }
+            });
+        }else{
+            Log.d(TAG, "verifyMentor: null");
+            String first = mMentorFirstName.getText().toString();
+            String last = mMentorLastName.getText().toString();
+            String phone = mMentorPhone.getText().toString();
+            String email = mMentorEmail.getText().toString();
+
+            mMentor = new MentorEntity(1, first, last, phone, email);
+            saveMentor(mMentor);
+        }
 
     }
 
