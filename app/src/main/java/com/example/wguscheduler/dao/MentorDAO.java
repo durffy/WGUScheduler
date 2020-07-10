@@ -27,7 +27,7 @@ public interface MentorDAO {
     LiveData<List<MentorEntity>> getMentors();
 
     @Query("SELECT * FROM mentor_table WHERE id MATCH :mentorId")
-    MentorEntity getMentor(int mentorId);
+    MentorEntity getMentor(long mentorId);
 
     //UPDATE
     @Update

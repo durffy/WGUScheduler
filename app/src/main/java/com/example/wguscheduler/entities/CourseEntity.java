@@ -22,7 +22,7 @@ public class CourseEntity {
 
     @ForeignKey(entity = MentorEntity.class, parentColumns = "id", childColumns = "id")
     @ColumnInfo(name = "mentor_id")
-    private int mMentorId;
+    private long mMentorId;
 
     @ColumnInfo(name = "title")
     private String mTitle;
@@ -39,7 +39,7 @@ public class CourseEntity {
     @ColumnInfo(name = "end_date")
     private Date mEndDate;
 
-    public CourseEntity(int mId, int mTermId, int mMentorId, String mTitle, String mStatus,
+    public CourseEntity(int mId, int mTermId, long mMentorId, String mTitle, String mStatus,
                         Date mStartDate, Date mEndDate, String mNotes) {
         this.mId = mId;
         this.mTermId = mTermId;
@@ -52,7 +52,7 @@ public class CourseEntity {
     }
 
     @Ignore
-    public CourseEntity(int mTermId, int mMentorId, String mTitle, String mStatus, Date mStartDate,
+    public CourseEntity(int mTermId, long mMentorId, String mTitle, String mStatus, Date mStartDate,
                         Date mEndDate, String mNotes) {
         this.mTermId = mTermId;
         this.mMentorId = mMentorId;
@@ -94,11 +94,11 @@ public class CourseEntity {
         this.mTermId = TermId;
     }
 
-    public int getMentorId() {
+    public long  getMentorId() {
         return mMentorId;
     }
 
-    public void setMentorId(int MentorId) {
+    public void setMentorId(long MentorId) {
         this.mMentorId = MentorId;
     }
 

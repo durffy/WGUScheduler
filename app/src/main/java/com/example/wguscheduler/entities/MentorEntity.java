@@ -9,10 +9,10 @@ import androidx.room.PrimaryKey;
 @Entity (tableName = "mentor_table")
 public class MentorEntity {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "id")
-    private int mId;
+    private long mId;
 
     @ColumnInfo(name = "first_name")
     private String mFirstName;
@@ -26,7 +26,7 @@ public class MentorEntity {
     @ColumnInfo(name = "email")
     private String mEmail;
 
-    public MentorEntity(int mId, String mFirstName, String mLastName, String mPhone, String mEmail) {
+    public MentorEntity(long mId, String mFirstName, String mLastName, String mPhone, String mEmail) {
         this.mId = mId;
         this.mFirstName = mFirstName;
         this.mLastName = mLastName;
@@ -42,11 +42,11 @@ public class MentorEntity {
         this.mEmail = mEmail;
     }
 
-    public int getId() {
+    public long  getId() {
         return mId;
     }
 
-    public void setId(int mId) {
+    public void setId(long mId) {
         this.mId = mId;
     }
 
