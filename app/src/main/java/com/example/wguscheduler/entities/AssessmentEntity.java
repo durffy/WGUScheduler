@@ -14,7 +14,7 @@ import static androidx.room.ForeignKey.CASCADE;
 @Entity (tableName = "assessment_table")
 public class AssessmentEntity {
 
-    @PrimaryKey
+    @PrimaryKey (autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "id")
     private int mId;
@@ -87,5 +87,17 @@ public class AssessmentEntity {
 
     public void setNotes(String mNotes) {
         this.mNotes = mNotes;
+    }
+
+    public String getAssessment() {
+
+
+        String assessment = String.format("Course ID: %s\n\r" +
+                        "Course title: %s" +
+                        "Course Notes: %s" +
+                        "Course Schedule: %s"
+                        , mCourseId, mTitle, mNotes, mScheduledDate);
+
+        return assessment;
     }
 }
