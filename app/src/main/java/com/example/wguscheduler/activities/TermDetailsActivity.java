@@ -140,14 +140,8 @@ public class TermDetailsActivity extends AppCompatActivity {
         //build the alert message
         AlertDialog.Builder builder = new AlertDialog.Builder(TermDetailsActivity.this);
         builder.setTitle("Term Delete");
-        builder.setMessage("Deleting this term will delete all associated course data. Do you want to proceed with the delete?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mTermViewModel.deleteTerm(termId);
-                finish();
-            }
-        });
+        builder.setMessage("There are Courses associated with this Term, the Term cannot be removed");
+
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -174,6 +168,13 @@ public class TermDetailsActivity extends AppCompatActivity {
 
                     if(filteredCourses.isEmpty()){
                         builder.setMessage("Do you want to proceed with the delete?");
+                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mTermViewModel.deleteTerm(termId);
+                                finish();
+                            }
+                        });
                     }
                 }
          });

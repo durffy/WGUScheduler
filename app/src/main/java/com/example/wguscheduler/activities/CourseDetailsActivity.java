@@ -204,8 +204,8 @@ public class CourseDetailsActivity extends AppCompatActivity {
     private void deleteCourse(int courseId) {
         //build the alert message
         AlertDialog.Builder builder = new AlertDialog.Builder(CourseDetailsActivity.this);
-        builder.setTitle("Term Delete");
-        builder.setMessage("Deleting this term will delete all associated course data. Do you want to proceed with the delete?");
+        builder.setTitle("Course Delete");
+        builder.setMessage("Deleting this Course will delete all associated Assessment data. Do you want to proceed with the delete?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

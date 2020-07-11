@@ -3,6 +3,7 @@ package com.example.wguscheduler.activities;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
@@ -70,7 +72,7 @@ public class AssessmentDetailActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if( id == R.id.item_delete){
-            deleteCourse(getIntent().getIntExtra("assessmentId",0));
+            deleteAssessment(getIntent().getIntExtra("assessmentId",0));
             return true;
         }else if( id == R.id.item_edit){
             editAssessment();
@@ -127,8 +129,29 @@ public class AssessmentDetailActivity extends AppCompatActivity{
         onSupportNavigateUp();
     }
     //delete
-    private void deleteCourse(int assessmentId) {
-        mAssessmentViewModel.deleteAssessment(assessmentId);
-        onSupportNavigateUp();
+    private void deleteAssessment(int assessmentId) {
+        //build the alert message
+        AlertDialog.Builder builder = new AlertDialog.Builder(AssessmentDetailActivity.this);
+        builder.setTitle("Assessment Delete");
+        builder.setMessage("Deleting this Assessment, Do you want to proceed with the delete?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mAssessmentViewModel.deleteAssessment(assessmentId);
+                finish();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+
     }
 }
