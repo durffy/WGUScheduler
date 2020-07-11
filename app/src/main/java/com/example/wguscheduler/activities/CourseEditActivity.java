@@ -193,7 +193,7 @@ public class CourseEditActivity extends AppCompatActivity {
                 public void onChanged(@Nullable final List<MentorEntity> mentors) {
                     for (MentorEntity m : mentors) {
 
-                        if(m.getId()== getIntent().getIntExtra("mentorId", 0)){
+                        if(m.getId()== getIntent().getLongExtra("mentorId", 0)){
                             mMentor = m;
                             mEditMentorFirstName.setText(m.getFirstName());
                             mEditMentorLastName.setText(m.getLastName());

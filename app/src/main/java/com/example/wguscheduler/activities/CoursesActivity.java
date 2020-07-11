@@ -62,6 +62,7 @@ public class CoursesActivity extends AppCompatActivity {
                 Intent intent = new Intent(CoursesActivity.this, CourseAddActivity.class);
                 intent.putExtra("termId", getIntent().getIntExtra("termId", 0));
                 intent.putExtra("courseId", getIntent().getIntExtra("courseId", 0));
+                intent.putExtra("mentorId", getIntent().getLongExtra("mentorId", 0));
                 startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
             }
         });

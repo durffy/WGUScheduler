@@ -197,7 +197,8 @@ public class CourseDetailsActivity extends AppCompatActivity {
     private void editCourse() {
         Intent intent = new Intent(CourseDetailsActivity.this, CourseEditActivity.class);
         intent.putExtra("courseId", getIntent().getIntExtra("courseId",0));
-        intent.putExtra("mentorId", getIntent().getIntExtra("mentorId",0));
+        intent.putExtra("mentorId", getIntent().getLongExtra("mentorId",0));
+
         startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
     }
     //delete
