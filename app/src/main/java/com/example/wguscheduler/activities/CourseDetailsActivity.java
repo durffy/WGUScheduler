@@ -110,7 +110,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         Calendar cal = Calendar.getInstance();
         Intent intent = new Intent(CourseDetailsActivity.this, NotificationReceiver.class);
-        intent.putExtra("key", "Test Short Message");
+        intent.putExtra("key", "Course End Date: " + formatter.format(mCourse.getEndDate()));
         PendingIntent sender = PendingIntent.getBroadcast(CourseDetailsActivity.this, 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         cal.setTime(mCourse.getEndDate());
