@@ -74,6 +74,7 @@ public class AssessmentsActivity extends AppCompatActivity {
                     //filter the list of courses to items that match the TermId
                     List<AssessmentEntity> filteredAssessments = new ArrayList<>();
                     assessmentAdapter.setCourses(assessments);
+
                     for (AssessmentEntity a : assessments) {
                         if(a.getCourseId()== getIntent().getIntExtra("courseId", 0)){
                             filteredAssessments.add(a);

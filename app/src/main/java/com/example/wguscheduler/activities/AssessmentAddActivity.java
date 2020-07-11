@@ -3,6 +3,7 @@ package com.example.wguscheduler.activities;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsSeekBar;
 import android.widget.DatePicker;
@@ -29,6 +30,7 @@ import java.util.Locale;
 
 public class AssessmentAddActivity extends AppCompatActivity {
 
+    private static final String TAG = "AssessmentAddActivity";
     AssessmentViewModel mAssessmentViewModel;
     private EditText mEditTitle, mEditNotes, mScheduledDate;
     private Calendar mScheduleCalendar = Calendar.getInstance();
@@ -106,6 +108,7 @@ public class AssessmentAddActivity extends AppCompatActivity {
         Date scheduledDate = formatter.parse(mScheduledDate.getText().toString());
 
         AssessmentEntity assessment = new AssessmentEntity(courseId, title, notes, scheduledDate);
+        Log.d(TAG, "saveAssessment: assessment " + assessment.getAssessment());
         mAssessmentViewModel.saveAssessment(assessment);
         onSupportNavigateUp();
     }
