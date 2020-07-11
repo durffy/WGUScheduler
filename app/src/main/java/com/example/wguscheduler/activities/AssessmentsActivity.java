@@ -80,6 +80,12 @@ public class AssessmentsActivity extends AppCompatActivity {
                             filteredAssessments.add(a);
                         }
                     }
+
+                    if(filteredAssessments.size() == 4){
+                        fab.hide();
+                    }else{
+                        fab.show();
+                    }
                     assessmentAdapter.setCourses(filteredAssessments);
 
                 }
