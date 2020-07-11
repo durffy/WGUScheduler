@@ -107,11 +107,28 @@ public class CourseDetailsActivity extends AppCompatActivity {
     }
 
     private void notification() {
+        notificationStartDate();
+        notificationEndDate();
+
+    }
+
+    private void notificationStartDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        Calendar cal = Calendar.getInstance();
+        Intent intent = new Intent(CourseDetailsActivity.this, NotificationReceiver.class);
+        intent.putExtra("key", "Course Start Date: " + formatter.format(mCourse.getStartDate()));
+        PendingIntent sender = PendingIntent.getBroadcast(CourseDetailsActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        cal.setTime(mCourse.getStartDate());
+        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis() , sender);
+    }
+
+    private void notificationEndDate() {
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         Calendar cal = Calendar.getInstance();
         Intent intent = new Intent(CourseDetailsActivity.this, NotificationReceiver.class);
         intent.putExtra("key", "Course End Date: " + formatter.format(mCourse.getEndDate()));
-        PendingIntent sender = PendingIntent.getBroadcast(CourseDetailsActivity.this, 0, intent, 0);
+        PendingIntent sender = PendingIntent.getBroadcast(CourseDetailsActivity.this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         cal.setTime(mCourse.getEndDate());
         alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis() , sender);

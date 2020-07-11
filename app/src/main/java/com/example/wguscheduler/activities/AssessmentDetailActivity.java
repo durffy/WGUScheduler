@@ -88,7 +88,7 @@ public class AssessmentDetailActivity extends AppCompatActivity{
         Calendar cal = Calendar.getInstance();
         Intent intent = new Intent(AssessmentDetailActivity.this, NotificationReceiver.class);
         intent.putExtra("key", "Scheduled Assessment: "+ formatter.format(mAssessment.getScheduledDate()));
-        PendingIntent sender = PendingIntent.getBroadcast(AssessmentDetailActivity.this, 1, intent, 0);
+        PendingIntent sender = PendingIntent.getBroadcast(AssessmentDetailActivity.this, 2, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         cal.setTime(mAssessment.getScheduledDate());
         alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis() , sender);
