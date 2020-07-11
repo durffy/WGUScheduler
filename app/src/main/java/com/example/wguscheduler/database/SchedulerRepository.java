@@ -29,6 +29,7 @@ public class SchedulerRepository {
     private LiveData<List<CourseEntity>> mAllCourses;
     private LiveData<List<AssessmentEntity>> mAllAssessments;
     private LiveData<List<MentorEntity>> mAllMentors;
+    private long mMentorLastId;
 
     private SchedulerDatabase mSchedulerDatabase;
     //executor to run only one thread, in order
@@ -52,6 +53,7 @@ public class SchedulerRepository {
         mAllCourses = mSchedulerDatabase.courseDAO().getCourses();
         mAllAssessments = mSchedulerDatabase.assessmentDAO().getAssessments();
         mAllMentors = mSchedulerDatabase.mentorDAO().getMentors();
+
     }
 
 
@@ -77,13 +79,12 @@ public class SchedulerRepository {
 
         });
     }
-    public void saveMentor(MentorEntity mMentor) {
+    public synchronized void saveMentor(MentorEntity mMentor) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                mSchedulerDatabase.mentorDAO().insert(mMentor);
+                mMentorLastId = mSchedulerDatabase.mentorDAO().insert(mMentor);
             }
-
         });
     }
     public void saveAssessment(AssessmentEntity assessment) {
@@ -128,6 +129,10 @@ public class SchedulerRepository {
     public LiveData<List<MentorEntity>> getAllMentors() {
         return mAllMentors;
     }
+    public long getLastId() {
+        return mMentorLastId;
+    }
+
 
     //delete
     public void deleteTerm(int termId) {

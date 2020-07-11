@@ -42,7 +42,7 @@ public class MentorEntity {
         this.mEmail = mEmail;
     }
 
-    public long  getId() {
+    public long getId() {
         return mId;
     }
 

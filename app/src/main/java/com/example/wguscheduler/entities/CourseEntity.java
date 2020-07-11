@@ -94,7 +94,7 @@ public class CourseEntity {
         this.mTermId = TermId;
     }
 
-    public long  getMentorId() {
+    public long getMentorId() {
         return mMentorId;
     }
 

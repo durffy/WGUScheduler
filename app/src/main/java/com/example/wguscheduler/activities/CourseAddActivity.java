@@ -38,6 +38,8 @@ public class CourseAddActivity extends AppCompatActivity {
     private EditText mCourseTitle, mCourseStartDate, mCourseEndDate,mCourseNotes,
         mMentorFirstName, mMentorLastName, mMentorEmail, mMentorPhone;
     private MentorEntity mMentor;
+    private CourseEntity mCourse;
+    private long mMentorLastId;
     private Calendar mEndCalendar = Calendar.getInstance();
     private Calendar mStartCalendar = Calendar.getInstance();
 
@@ -146,34 +148,36 @@ public class CourseAddActivity extends AppCompatActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         verifyMentor();
         int termId = getIntent().getIntExtra("termId", 0);
-        //int mentorId = mMentor.getId();
         String title = mCourseTitle.getText().toString();
         String status = "Plan to Take";
         Date start = formatter.parse(mCourseStartDate.getText().toString());
         Date end = formatter.parse(mCourseEndDate.getText().toString());
         String notes = mCourseNotes.getText().toString();
 
-        CourseEntity course = new CourseEntity(termId, mMentor.getId(), title, status, start, end, notes);
-        Log.d(TAG, "saveCourse: " + course.getCourse());
-        mCourseViewModel.saveCourse(course);
+
+        while(mMentorLastId == mMentorViewModel.getLastId()){
+            Log.d(TAG, "saveCourse: while mMentorLastId " +mMentorLastId);
+            Log.d(TAG, "saveCourse: while mMentorViewModel.getLastId() " +mMentorViewModel.getLastId());
+        }
+        Log.d(TAG, "saveCourse: mMentorLastId " +mMentorLastId);
+        Log.d(TAG, "saveCourse: mMentorViewModel.getLastId() " +mMentorViewModel.getLastId());
+        mCourse = new CourseEntity(termId, mMentorViewModel.getLastId(), title, status, start, end, notes);
+
+        mCourseViewModel.saveCourse(mCourse);
         onSupportNavigateUp();
     }
 
 
     private void verifyMentor() {
-
+        mMentorLastId = mMentorViewModel.getLastId();
         String first = mMentorFirstName.getText().toString();
         String last = mMentorLastName.getText().toString();
         String phone = mMentorPhone.getText().toString();
         String email = mMentorEmail.getText().toString();
 
         mMentor = new MentorEntity(first, last, phone, email);
-        saveMentor(mMentor);
+        mMentorViewModel.saveMentor(mMentor);
 
-    }
-
-    private void saveMentor(MentorEntity mentorEntity) {
-        mMentorViewModel.saveMentor(mentorEntity);
     }
 
     // add support for going back a screen

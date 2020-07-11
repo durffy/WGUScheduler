@@ -34,4 +34,8 @@ public class MentorViewModel extends AndroidViewModel {
     public void saveMentor(MentorEntity mMentor) {
         mSchedulerRepository.saveMentor(mMentor);
     }
+
+    public long getLastId() {
+        return mSchedulerRepository.getLastId();
+    }
 }

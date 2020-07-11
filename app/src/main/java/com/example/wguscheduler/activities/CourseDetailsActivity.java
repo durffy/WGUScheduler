@@ -180,7 +180,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
                     for (MentorEntity m : mentors) {
 
-                        if(m.getId()== getIntent().getIntExtra("mentorId", 0)){
+                        if(m.getId()== getIntent().getLongExtra("mentorId", 0)){
                             //todo: split into first and last name
                             String name = m.getFirstName() + " " + m.getLastName();
                             textViewMentor.setText(name);

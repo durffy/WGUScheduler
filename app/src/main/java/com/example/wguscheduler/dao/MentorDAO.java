@@ -20,14 +20,17 @@ public interface MentorDAO {
     void insertAll(List<MentorEntity> mentors);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(MentorEntity mentor);
+    long insert(MentorEntity mentor);
 
     //READ
     @Query("SELECT * FROM mentor_table")
     LiveData<List<MentorEntity>> getMentors();
 
     @Query("SELECT * FROM mentor_table WHERE id MATCH :mentorId")
-    MentorEntity getMentor(long mentorId);
+    MentorEntity getMentor(int mentorId);
+
+    @Query("SELECT MAX(id) FROM mentor_table")
+    long getLastId();
 
     //UPDATE
     @Update
@@ -36,5 +39,6 @@ public interface MentorDAO {
     //DELETE
     @Delete
     void delete(MentorEntity mentor);
+
 
 }
