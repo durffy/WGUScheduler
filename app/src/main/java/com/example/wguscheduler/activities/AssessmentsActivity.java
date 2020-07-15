@@ -81,7 +81,7 @@ public class AssessmentsActivity extends AppCompatActivity {
                         }
                     }
 
-                    if(filteredAssessments.size() == 4){
+                    if(filteredAssessments.size() == 5){
                         fab.hide();
                     }else{
                         fab.show();
